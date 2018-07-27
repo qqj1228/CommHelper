@@ -68,13 +68,14 @@ void SerialPort::initParameters()
 }
 
 QString SerialPort::openSerialPort() {
-    QString message = "";
     m_pSerial->setPortName(m_pCboxPort->itemData(m_pCboxPort->currentIndex()).toString());
     m_pSerial->setBaudRate(m_pCboxBaud->currentText().toInt());
     m_pSerial->setDataBits(static_cast<QSerialPort::DataBits>(m_pCboxBit->itemData(m_pCboxBit->currentIndex()).toInt()));
     m_pSerial->setParity(static_cast<QSerialPort::Parity>(m_pCboxParity->itemData(m_pCboxParity->currentIndex()).toInt()));
     m_pSerial->setStopBits(static_cast<QSerialPort::StopBits>(m_pCboxStop->itemData(m_pCboxStop->currentIndex()).toInt()));
     m_pSerial->setFlowControl(static_cast<QSerialPort::FlowControl>(m_pCboxFlow->itemData(m_pCboxFlow->currentIndex()).toInt()));
+
+    QString message = "";
     if (m_pSerial->open(QIODevice::ReadWrite)) {
         message = "成功打开串口: " + m_pSerial->portName();
     } else {
@@ -115,6 +116,10 @@ void SerialPort::handleError(QSerialPort::SerialPortError error)
         QMessageBox::critical(m_pParent, QString("SerialPort Error"), QString("Error code: %1\nDescription: %2").arg(error).arg(m_pSerial->errorString()));
         this->closeSerialPort();
         emit serialPortClosed();
+    } else if (error == QSerialPort::WriteError || error == QSerialPort::ReadError || error == QSerialPort::UnsupportedOperationError || error == QSerialPort::TimeoutError || error == QSerialPort::UnknownError) {
+        QMessageBox::critical(m_pParent, QString("SerialPort Error"), QString("Error code: %1\nDescription: %2").arg(error).arg(m_pSerial->errorString()));
+    } else if (error == QSerialPort::ParityError) {
+        QMessageBox::critical(m_pParent, QString("SerialPort Error"), QString("Error code: %1\nDescription: %2").arg(error).arg(m_pSerial->errorString()));
     }
 }
 

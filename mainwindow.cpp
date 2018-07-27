@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "utility.h"
 #include <QTime>
-#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pMySerial = new SerialPort(m_pUi->tabSerial, this);
     m_pMyConfig = new Config(this);
     m_pMyConfig->loadSended(m_pUi->cboxSend);
+    m_pMyConfig->loadFilter(m_pUi->cboxFilter);
+    m_pMyConfig->loadSerialPort(m_pMySerial);
 
     connect(m_pMySerial, SIGNAL(bytesSended(qint64)), this, SLOT(onSended(qint64)));
     connect(m_pMySerial, &SerialPort::serialPortClosed, [=](){
@@ -42,6 +43,7 @@ MainWindow::~MainWindow()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     //TODO: 在退出窗口之前，实现希望做的操作
+    m_pMyConfig->saveSerialPort(m_pMySerial);
     m_pMyConfig->saveSended(m_pUi->cboxSend);
     event->accept();
 }
@@ -65,14 +67,27 @@ QString MainWindow::getDisplayMessage(QByteArray &data, bool send) {
     QString qstrMessage = CommHelper::getDisplayString(data);
     QString qstrHexMessage = CommHelper::getHexString(data);
     if (send) {
-        message += QString("[Send to \"%1\" - Bytes: %2]: %3\n").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
+        message += QString("[Send to \"%1\" - Bytes: %2]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
     } else {
-        message += QString("[Recv from \"%1\" - Bytes: %2]: %3\n").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
+        message += QString("[Recv from \"%1\" - Bytes: %2]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
     }
-    message += QString("====== Hex: %1").arg(qstrHexMessage);
+    message += QString("\n====== Hex: %1").arg(qstrHexMessage);
+    if (m_bFilter) {
+        QString qstrFilterMessage = CommHelper::getFilterString(data, CommHelper::getFilterList(m_pUi->cboxFilter->currentText()));
+        message += QString("\n++++++ Filter: %1").arg(qstrFilterMessage);
+        QString str = m_pUi->cboxFilter->currentText().remove(QRegularExpression("[^\\d ,-]+"));
+        m_pUi->cboxFilter->setCurrentText(str);
+        this->addConfig(m_pUi->cboxFilter);
+    }
     return message;
 }
 
+void MainWindow::addConfig(QComboBox *cmb) {
+    if (cmb->findText(cmb->currentText()) == -1) {
+        cmb->addItem(cmb->currentText());
+        m_pMyConfig->setFilter(cmb, cmb->currentText());
+    }
+}
 
 // Qt自动默认命名槽函数的话无需手动connect，否则会触发两次
 void MainWindow::on_btnOpen_clicked(bool checked)
@@ -107,20 +122,7 @@ void MainWindow::onSended(qint64 bytes) {
     m_pUi->textBrowser->append(message);
     m_iSended += bytes;
     this->showBytes();
-    if (!hasSended()) {
-        m_pUi->cboxSend->addItem(m_pUi->cboxSend->currentText());
-        m_pMyConfig->setSended(m_pUi->cboxSend, m_pUi->cboxSend->currentText());
-    }
-}
-
-bool MainWindow::hasSended() {
-    int count = m_pUi->cboxSend->count();
-    for (int i = 0; i < count; ++i) {
-        if (m_pUi->cboxSend->itemText(i) == m_pUi->cboxSend->currentText()) {
-            return true;
-        }
-    }
-    return false;
+    this->addConfig(m_pUi->cboxSend);
 }
 
 void MainWindow::on_btnClear_clicked()
@@ -152,4 +154,18 @@ void MainWindow::onRecved(QByteArray data) {
     m_pUi->textBrowser->append(message);
     m_iRecved += data.size();
     this->showBytes();
+}
+
+void MainWindow::on_btnClearText_clicked()
+{
+    m_pUi->textBrowser->clear();
+}
+
+void MainWindow::on_btnFilter_clicked(bool checked)
+{
+    if (checked) {
+        m_bFilter = true;
+    } else {
+        m_bFilter = false;
+    }
 }

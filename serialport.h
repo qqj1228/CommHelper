@@ -34,7 +34,7 @@ protected:
     QWidget *m_pParent = nullptr;
     QWidget *m_pTab = nullptr;
     QSerialPort *m_pSerial = nullptr;
-private:
+public:
     QComboBox *m_pCboxPort = nullptr;
     QComboBox *m_pCboxBaud = nullptr;
     QComboBox *m_pCboxBit = nullptr;

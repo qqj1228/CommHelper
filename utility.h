@@ -5,6 +5,7 @@
 #include <QtGlobal>
 #include <QString>
 #include <QRegularExpression>
+#include <QDebug>
 
 namespace CommHelper {
 
@@ -39,7 +40,7 @@ QStringList doSplit(QString &str) {
     QStringList list;
     QString item;
     int itemLen = 0;
-    list = str.split(QRegularExpression("[ ,./]+"), QString::SkipEmptyParts);
+    list = str.split(QRegularExpression("[ ,]+"), QString::SkipEmptyParts);
     int listLen = list.size();
     for (int i = 0; i < listLen; ++i) {
         item = list.at(i);
@@ -115,6 +116,42 @@ QString getHexString(QByteArray data) {
     ret += strList.join(" ");
     ret += "]";
     return ret;
+}
+
+QString getFilterString(QByteArray data, QStringList filter) {
+    QString ret;
+    for (QString &item : filter) {
+        if (item.contains('-')) {
+            if (item.startsWith('-')) {
+                ret += getHexString(data.left(item.remove('-').toInt() + 1)) + " ";
+            } else if (item.endsWith('-')) {
+                ret += getHexString(data.mid(item.remove('-').toInt())) + " ";
+            } else {
+                QStringList l = item.split('-', QString::SkipEmptyParts);
+                int first = l.first().toInt();
+                int last = l.last().toInt();
+                ret += getHexString(data.mid(first, last - first + 1)) + " ";
+            }
+        } else {
+            ret += getHexString(data.mid(item.toInt(), 1)) + " ";
+        }
+    }
+    ret.remove(ret.size() - 1, 1);
+    return ret;
+}
+
+QStringList getFilterList(const QString &text) {
+    QStringList filter;
+    QStringList result;
+    QString str;
+    filter = text.split(QRegularExpression("[ ,]+"), QString::SkipEmptyParts);
+    for (QString &item : filter) {
+        str = item.remove(QRegularExpression("[^\\d-]+"));
+        if (str != "") {
+            result << str;
+        }
+    }
+    return result;
 }
 
 }

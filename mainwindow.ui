@@ -26,7 +26,41 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="2">
+    <item row="3" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QComboBox" name="cboxFilter">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFilter">
+        <property name="text">
+         <string>筛选显示</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnClearText">
+        <property name="text">
+         <string> 清除显示</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="5" column="2">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QComboBox" name="cboxSend">
@@ -51,13 +85,26 @@
       <item>
        <widget class="QPushButton" name="btnClear">
         <property name="text">
-         <string>清除记录</string>
+         <string>清除发送</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="1" column="0" rowspan="3">
+    <item row="1" column="2">
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>2</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -84,6 +131,9 @@
           <property name="text">
            <string>串口号</string>
           </property>
+          <property name="buddy">
+           <cstring>cboxPort</cstring>
+          </property>
          </widget>
         </item>
         <item row="0" column="1">
@@ -101,6 +151,9 @@
           <property name="text">
            <string>波特率</string>
           </property>
+          <property name="buddy">
+           <cstring>cboxBaud</cstring>
+          </property>
          </widget>
         </item>
         <item row="1" column="1">
@@ -114,6 +167,9 @@
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>数据位</string>
+          </property>
+          <property name="buddy">
+           <cstring>cboxBit</cstring>
           </property>
          </widget>
         </item>
@@ -132,6 +188,9 @@
           <property name="text">
            <string>校验位</string>
           </property>
+          <property name="buddy">
+           <cstring>cboxParity</cstring>
+          </property>
          </widget>
         </item>
         <item row="3" column="1">
@@ -149,6 +208,9 @@
           <property name="text">
            <string>停止位</string>
           </property>
+          <property name="buddy">
+           <cstring>cboxStop</cstring>
+          </property>
          </widget>
         </item>
         <item row="4" column="1">
@@ -165,6 +227,9 @@
          <widget class="QLabel" name="label_6">
           <property name="text">
            <string>流  控</string>
+          </property>
+          <property name="buddy">
+           <cstring>cboxFlow</cstring>
           </property>
          </widget>
         </item>
@@ -205,27 +270,27 @@
       </widget>
      </widget>
     </item>
-    <item row="1" column="2">
-     <widget class="QTextBrowser" name="textBrowser">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>2</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="lineWrapMode">
-       <enum>QTextEdit::NoWrap</enum>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>textBrowser</tabstop>
+  <tabstop>cboxFilter</tabstop>
+  <tabstop>btnFilter</tabstop>
+  <tabstop>btnClearText</tabstop>
+  <tabstop>cboxSend</tabstop>
   <tabstop>btnSend</tabstop>
+  <tabstop>btnClear</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>cboxPort</tabstop>
+  <tabstop>cboxBaud</tabstop>
+  <tabstop>cboxBit</tabstop>
+  <tabstop>cboxParity</tabstop>
+  <tabstop>cboxStop</tabstop>
+  <tabstop>cboxFlow</tabstop>
+  <tabstop>btnOpen</tabstop>
  </tabstops>
  <resources/>
  <connections/>

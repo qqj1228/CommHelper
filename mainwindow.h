@@ -31,11 +31,15 @@ private slots:
     void on_tabWidget_currentChanged(int index);
     void onRecved(QByteArray data);
 
+    void on_btnClearText_clicked();
+
+    void on_btnFilter_clicked(bool checked);
+
 private:
     void showStatus(const QString &message);
     void showBytes();
     QString getDisplayMessage(QByteArray &data, bool send);
-    bool hasSended();
+    void addConfig(QComboBox *cmb);
 
     Ui::MainWindow *m_pUi = nullptr;
     QLabel *m_pLStatus = nullptr;
@@ -46,8 +50,10 @@ private:
     QByteArray m_send;
     QString m_qstrMessage;
     QString m_qstrHexMessage;
+    QString m_qstrFilterMessage;
     qint64 m_iRecved = 0;
     qint64 m_iSended = 0;
+    bool m_bFilter = false;
 };
 
 #endif // MAINWINDOW_H
