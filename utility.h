@@ -154,6 +154,18 @@ QStringList getFilterList(const QString &text) {
     return result;
 }
 
+void escapeHtml(QString &str) {
+    // 注意这几行代码的顺序不能乱，否则会造成多次替换
+    str.replace("&", "&amp;");
+    str.replace(">", "&gt;");
+    str.replace("<", "&lt;");
+    str.replace("\"", "&quot;");
+    str.replace("\'", "&#39;");
+    str.replace(" ", "&nbsp;");
+    str.replace("\n", "<br>");
+    str.replace("\r", "<br>");
+}
+
 }
 
 #endif // UTILITY_H

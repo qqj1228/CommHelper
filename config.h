@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QComboBox>
 #include "serialport.h"
+#include "setup.h"
 
 #define CFG_APP_NAME "CommHelper"
 #define CFG_SEC_SENDED "Sended"
@@ -18,6 +19,10 @@
 #define CFG_KEY_PARITY "Parity"
 #define CFG_KEY_STOP "Stop"
 #define CFG_KEY_FLOW "Flow"
+#define CFG_SEC_SETUP "Setup"
+#define CFG_KEY_SENDCLR "SendColor"
+#define CFG_KEY_RECVCLR "RecvColor"
+#define CFG_KEY_FONTSIZE "FontSize"
 
 class Config : public QObject
 {
@@ -37,6 +42,8 @@ public:
     void remove(const QString &topKey);
     void saveSerialPort(const SerialPort *pMySerialPort);
     void loadSerialPort(SerialPort *pMySerialPort);
+    void saveSetup(const Setup *pMySetup);
+    void loadSetup(Setup *pMySetup);
 
 signals:
 

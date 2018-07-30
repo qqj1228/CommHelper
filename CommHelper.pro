@@ -27,13 +27,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     serialport.cpp \
-    config.cpp
+    config.cpp \
+    setup.cpp
 
 HEADERS += \
         mainwindow.h \
     serialport.h \
     utility.h \
-    config.h
+    config.h \
+    setup.h
 
 FORMS += \
         mainwindow.ui

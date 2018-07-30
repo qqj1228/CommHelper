@@ -113,3 +113,19 @@ void Config::loadSerialPort(SerialPort *pMySerialPort) {
     pMySerialPort->m_pCboxFlow->setCurrentIndex(m_pConfig->value(CFG_KEY_FLOW, -1).toInt());
     m_pConfig->endGroup();
 }
+
+void Config::saveSetup(const Setup *pMySetup) {
+    m_pConfig->beginGroup(CFG_SEC_SETUP);
+    m_pConfig->setValue(CFG_KEY_SENDCLR, pMySetup->m_qclrSend.name());
+    m_pConfig->setValue(CFG_KEY_RECVCLR, pMySetup->m_qclrRecv.name());
+    m_pConfig->setValue(CFG_KEY_FONTSIZE, pMySetup->m_fontSize);
+    m_pConfig->endGroup();
+}
+
+void Config::loadSetup(Setup *pMySetup) {
+    m_pConfig->beginGroup(CFG_SEC_SETUP);
+    pMySetup->m_qclrSend = m_pConfig->value(CFG_KEY_SENDCLR, "blue").value<QColor>();
+    pMySetup->m_qclrRecv = m_pConfig->value(CFG_KEY_RECVCLR, "green").value<QColor>();
+    pMySetup->m_fontSize = m_pConfig->value(CFG_KEY_FONTSIZE, "10").toString();
+    m_pConfig->endGroup();
+}

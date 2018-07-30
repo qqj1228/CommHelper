@@ -20,10 +20,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->showStatus(QString("准备就绪"));
     this->showBytes();
     m_pMySerial = new SerialPort(m_pUi->tabSerial, this);
+    m_pMySetup = new Setup(m_pUi->tabSetup, this);
     m_pMyConfig = new Config(this);
     m_pMyConfig->loadSended(m_pUi->cboxSend);
     m_pMyConfig->loadFilter(m_pUi->cboxFilter);
     m_pMyConfig->loadSerialPort(m_pMySerial);
+    m_pMyConfig->loadSetup(m_pMySetup);
 
     connect(m_pMySerial, SIGNAL(bytesSended(qint64)), this, SLOT(onSended(qint64)));
     connect(m_pMySerial, &SerialPort::serialPortClosed, [=](){
@@ -44,6 +46,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     //TODO: 在退出窗口之前，实现希望做的操作
     m_pMyConfig->saveSerialPort(m_pMySerial);
+    m_pMyConfig->saveSetup(m_pMySetup);
     m_pMyConfig->saveSended(m_pUi->cboxSend);
     event->accept();
 }
@@ -79,6 +82,13 @@ QString MainWindow::getDisplayMessage(QByteArray &data, bool send) {
         m_pUi->cboxFilter->setCurrentText(str);
         this->addConfig(m_pUi->cboxFilter);
     }
+    CommHelper::escapeHtml(message);
+    if (send) {
+        message.insert(0, QString("<p style=\"color:%1; font-size:%2pt;\">").arg(m_pMySetup->m_qclrSend.name()).arg(m_pMySetup->m_fontSize));
+    } else {
+        message.insert(0, QString("<p style=\"color:%1; font-size:%2pt;\">").arg(m_pMySetup->m_qclrRecv.name()).arg(m_pMySetup->m_fontSize));
+    }
+    message.append("</p>");
     return message;
 }
 
@@ -143,6 +153,10 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         break;
     case 2:
         // UDP
+        break;
+    case 3:
+        // 设置
+        m_pMySetup->updateUI();
         break;
     default:
         break;

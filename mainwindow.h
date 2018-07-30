@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include "serialport.h"
+#include "setup.h"
 #include "config.h"
 
 class QLabel;
@@ -46,6 +47,7 @@ private:
     QLabel *m_pLRecv = nullptr;
     QLabel *m_pLSend = nullptr;
     SerialPort *m_pMySerial = nullptr;
+    Setup *m_pMySetup = nullptr;
     Config *m_pMyConfig = nullptr;
     QByteArray m_send;
     QString m_qstrMessage;
