@@ -8,6 +8,9 @@ Setup::Setup(QWidget *tab, QObject *parent) : QObject(parent),
 
     connect(m_pbtnSendClr, SIGNAL(clicked(bool)), this, SLOT(onSendClr()));
     connect(m_pbtnRecvClr, SIGNAL(clicked(bool)), this, SLOT(onRecvClr()));
+    connect(m_pedtSize, &QLineEdit::editingFinished, [=](){
+       this->m_fontSize = m_pedtSize->text();
+    });
 }
 
 void Setup::initUI() {
