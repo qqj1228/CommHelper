@@ -1,11 +1,12 @@
 #include "serialport.h"
+#include "mainwindow.h"
 #include <QSerialPortInfo>
 #include <QMessageBox>
 
 SerialPort::SerialPort(QWidget *tab, QObject *parent) :
     QObject(parent),
     m_pTab(tab),
-    m_pSerial(new QSerialPort(parent))
+    m_pSerial(new QSerialPort(this))
 {
     m_pParent = qobject_cast<QWidget *>(parent);
     initComboBox();
@@ -17,7 +18,7 @@ SerialPort::SerialPort(QWidget *tab, QObject *parent) :
 }
 
 SerialPort::~SerialPort() {
-    delete m_pSerial;
+//    delete m_pSerial;
 }
 
 void SerialPort::initComboBox() {
@@ -135,6 +136,6 @@ void SerialPort::updatePort() {
 
 QString SerialPort::recvData() {
     const QByteArray data = m_pSerial->readAll();
-    emit hasRecved(data);
+    emit hasRecved(data, MainWindow::SerialTab);
     return QString("串口: %1 已接收: %2字节").arg(m_pSerial->portName()).arg(data.size());
 }

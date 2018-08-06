@@ -26,50 +26,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="5" column="2">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QComboBox" name="cboxSend">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="editable">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnSend">
-        <property name="text">
-         <string>发送</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnClear">
-        <property name="text">
-         <string>清除发送</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="2">
-     <widget class="QTextBrowser" name="textBrowser">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>2</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="lineWrapMode">
-       <enum>QTextEdit::NoWrap</enum>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="2">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -99,6 +55,37 @@
        <widget class="QPushButton" name="btnClearText">
         <property name="text">
          <string> 清除显示</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="5" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QComboBox" name="cboxSend">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSend">
+        <property name="text">
+         <string>发送</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnClear">
+        <property name="text">
+         <string>清除发送</string>
         </property>
        </widget>
       </item>
@@ -267,6 +254,89 @@
        <attribute name="title">
         <string>UDP</string>
        </attribute>
+       <layout class="QFormLayout" name="formLayout_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>目的IP地址</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxDestIP</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="cbxDestIP">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>目的端口号</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxDestPort</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="cbxDestPort">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>接收IP地址</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxRecvIP</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="cbxRecvIP">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>接收端口号</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxRecvPort</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QComboBox" name="cbxRecvPort">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="btnUDP">
+          <property name="text">
+           <string>打开UDP接收</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tabSetup">
        <attribute name="title">
@@ -277,6 +347,9 @@
          <widget class="QLabel" name="labSend">
           <property name="text">
            <string>发送颜色</string>
+          </property>
+          <property name="buddy">
+           <cstring>btnSendColor</cstring>
           </property>
          </widget>
         </item>
@@ -289,7 +362,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>...</string>
+           <string>设置发送颜色</string>
           </property>
          </widget>
         </item>
@@ -297,6 +370,9 @@
          <widget class="QLabel" name="labRecv">
           <property name="text">
            <string>接收颜色</string>
+          </property>
+          <property name="buddy">
+           <cstring>btnRecvColor</cstring>
           </property>
          </widget>
         </item>
@@ -309,7 +385,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>...</string>
+           <string>设置接收颜色</string>
           </property>
          </widget>
         </item>
@@ -318,13 +394,42 @@
           <property name="text">
            <string>显示字体大小 (pt)</string>
           </property>
+          <property name="buddy">
+           <cstring>edtFontSize</cstring>
+          </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="edtFontSize"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>历史记录最大数量</string>
+          </property>
+          <property name="buddy">
+           <cstring>edtHistory</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="edtHistory"/>
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>2</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
      </widget>
     </item>
    </layout>

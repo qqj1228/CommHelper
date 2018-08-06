@@ -13,11 +13,11 @@ Config::Config(QObject *parent) : QObject(parent)
             path = dir.absolutePath();
     }
     QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
-    m_pConfig = new QSettings(QSettings::IniFormat, QSettings::UserScope, CFG_APP_NAME);
+    m_pConfig = new QSettings(QSettings::IniFormat, QSettings::UserScope, CFG_APP_NAME, "", this);
 }
 
 Config::~Config() {
-    delete m_pConfig;
+//    delete m_pConfig;
 }
 
 void Config::setQString(const QString& section, const QString& key, const QString& val)
@@ -35,51 +35,28 @@ QString Config::getQString(const QString& section, const QString& key, const QSt
     return m_pConfig->value(QString("%1/%2").arg(section).arg(key), def).toString();
 }
 
-void Config::setSended(const QComboBox* cmb, const QString& val) {
+void Config::setHistory(const QComboBox* cmb, const QString &section, const QString& val) {
     int index = cmb->count() - 1;
-    this->setQString(CFG_SEC_SENDED, QString(CFG_KEY_SENDED).append("%1").arg(index), val);
+    this->setQString(section, QString(CFG_KEY_ITEM).append("_%1").arg(index), val);
 }
 
-void Config::setFilter(const QComboBox* cmb, const QString& val) {
-    int index = cmb->count() - 1;
-    this->setQString(CFG_SEC_FILTER, QString(CFG_KEY_FILTER).append("%1").arg(index), val);
-}
-
-void Config::saveSended(const QComboBox* cmb) {
-    QString val;
+void Config::saveHistory(const QComboBox* cmb, const QString &section) {
     int index = cmb->count();
-    m_pConfig->beginGroup(CFG_SEC_SENDED);
+    m_pConfig->beginGroup(section);
     for (int i = 0; i < index; ++i) {
-        val = cmb->itemText(i);
-        m_pConfig->setValue(QString(CFG_KEY_SENDED).append("%1").arg(i), val);
+        m_pConfig->setValue(QString(CFG_KEY_ITEM).append("_%1").arg(i), cmb->itemText(i));
     }
     m_pConfig->endGroup();
 }
 
-void Config::loadSended(QComboBox *cmb) {
+void Config::loadHistory(QComboBox *cmb, const QString &section) {
     QString val;
     cmb->clear();
-    m_pConfig->beginGroup(CFG_SEC_SENDED);
+    m_pConfig->beginGroup(section);
     QStringList keys = m_pConfig->childKeys();
     int count = keys.size();
     for (int i = 0; i < count; ++i) {
-        val = m_pConfig->value(QString(CFG_KEY_SENDED).append("%1").arg(i)).toString();
-        if (val != "") {
-            cmb->addItem(val);
-        }
-    }
-    m_pConfig->endGroup();
-    cmb->setCurrentIndex(-1);
-}
-
-void Config::loadFilter(QComboBox *cmb) {
-    QString val;
-    cmb->clear();
-    m_pConfig->beginGroup(CFG_SEC_FILTER);
-    QStringList keys = m_pConfig->childKeys();
-    int count = keys.size();
-    for (int i = 0; i < count; ++i) {
-        val = m_pConfig->value(QString(CFG_KEY_FILTER).append("%1").arg(i)).toString();
+        val = m_pConfig->value(QString(CFG_KEY_ITEM).append("_%1").arg(i)).toString();
         if (val != "") {
             cmb->addItem(val);
         }
@@ -119,6 +96,7 @@ void Config::saveSetup(const Setup *pMySetup) {
     m_pConfig->setValue(CFG_KEY_SENDCLR, pMySetup->m_qclrSend.name());
     m_pConfig->setValue(CFG_KEY_RECVCLR, pMySetup->m_qclrRecv.name());
     m_pConfig->setValue(CFG_KEY_FONTSIZE, pMySetup->m_fontSize);
+    m_pConfig->setValue(CFG_KEY_HISTORY, pMySetup->m_iHistory);
     m_pConfig->endGroup();
 }
 
@@ -127,5 +105,24 @@ void Config::loadSetup(Setup *pMySetup) {
     pMySetup->m_qclrSend = m_pConfig->value(CFG_KEY_SENDCLR, "blue").value<QColor>();
     pMySetup->m_qclrRecv = m_pConfig->value(CFG_KEY_RECVCLR, "green").value<QColor>();
     pMySetup->m_fontSize = m_pConfig->value(CFG_KEY_FONTSIZE, "10").toString();
+    pMySetup->m_iHistory = m_pConfig->value(CFG_KEY_HISTORY, "10").toInt();
+    m_pConfig->endGroup();
+}
+
+void Config::saveUDP(const UDPApp *pMyUDP) {
+    m_pConfig->beginGroup(CFG_SEC_UDP);
+    m_pConfig->setValue(CFG_KEY_DESTIP, pMyUDP->m_pcbxDestIP->currentIndex());
+    m_pConfig->setValue(CFG_KEY_DESTPORT, pMyUDP->m_pcbxDestPort->currentIndex());
+    m_pConfig->setValue(CFG_KEY_RECVIP, pMyUDP->m_pcbxRecvIP->currentIndex());
+    m_pConfig->setValue(CFG_KEY_RECVPORT, pMyUDP->m_pcbxRecvPort->currentIndex());
+    m_pConfig->endGroup();
+}
+
+void Config::loadUDP(UDPApp *pMyUDP) {
+    m_pConfig->beginGroup(CFG_SEC_UDP);
+    pMyUDP->m_pcbxDestIP->setCurrentIndex(m_pConfig->value(CFG_KEY_DESTIP, -1).toInt());
+    pMyUDP->m_pcbxDestPort->setCurrentIndex(m_pConfig->value(CFG_KEY_DESTPORT, -1).toInt());
+    pMyUDP->m_pcbxRecvIP->setCurrentIndex(m_pConfig->value(CFG_KEY_RECVIP, -1).toInt());
+    pMyUDP->m_pcbxRecvPort->setCurrentIndex(m_pConfig->value(CFG_KEY_RECVPORT, -1).toInt());
     m_pConfig->endGroup();
 }

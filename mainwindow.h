@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include "serialport.h"
+#include "udpapp.h"
 #include "setup.h"
 #include "config.h"
 
@@ -18,6 +19,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    enum TabIndex {
+        SerialTab,
+        TCPTab,
+        UDPTab,
+        SetupTab,
+    };
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -30,16 +38,15 @@ private slots:
     void onSended(qint64 bytes);
     void on_btnClear_clicked();
     void on_tabWidget_currentChanged(int index);
-    void onRecved(QByteArray data);
-
+    void onRecved(QByteArray data, int enumTunnel);
     void on_btnClearText_clicked();
-
-    void on_btnFilter_clicked(bool checked);
+    void on_btnUDP_clicked(bool checked);
+    void onShowError(QString qstrError);
 
 private:
     void showStatus(const QString &message);
     void showBytes();
-    QString getDisplayMessage(QByteArray &data, bool send);
+    QString getDisplayMessage(QByteArray &data, bool send, int enumTunnel);
     void addConfig(QComboBox *cmb);
 
     Ui::MainWindow *m_pUi = nullptr;
@@ -47,6 +54,7 @@ private:
     QLabel *m_pLRecv = nullptr;
     QLabel *m_pLSend = nullptr;
     SerialPort *m_pMySerial = nullptr;
+    UDPApp *m_pMyUDP = nullptr;
     Setup *m_pMySetup = nullptr;
     Config *m_pMyConfig = nullptr;
     QByteArray m_send;
@@ -55,7 +63,6 @@ private:
     QString m_qstrFilterMessage;
     qint64 m_iRecved = 0;
     qint64 m_iSended = 0;
-    bool m_bFilter = false;
 };
 
 #endif // MAINWINDOW_H

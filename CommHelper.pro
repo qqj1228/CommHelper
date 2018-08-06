@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,14 +28,16 @@ SOURCES += \
         mainwindow.cpp \
     serialport.cpp \
     config.cpp \
-    setup.cpp
+    setup.cpp \
+    udpapp.cpp
 
 HEADERS += \
         mainwindow.h \
     serialport.h \
     utility.h \
     config.h \
-    setup.h
+    setup.h \
+    udpapp.h
 
 FORMS += \
         mainwindow.ui

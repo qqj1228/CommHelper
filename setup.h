@@ -27,6 +27,7 @@ public:
     QColor m_qclrSend;
     QColor m_qclrRecv;
     QString m_fontSize;
+    int m_iHistory;
 
 protected:
     QWidget *m_pTab = nullptr;
@@ -35,6 +36,7 @@ protected:
     QPushButton *m_pbtnSendClr = nullptr;
     QPushButton *m_pbtnRecvClr = nullptr;
     QLineEdit *m_pedtSize = nullptr;
+    QLineEdit *m_pedtHistory = nullptr;
 };
 
 #endif // SETUP_H
