@@ -36,15 +36,15 @@ void UDPApp::initUI() {
 QString UDPApp::initRecv() {
     bool bResult = m_pRecv->bind(QHostAddress(m_pcbxRecvIP->currentText()), m_pcbxRecvPort->currentText().toInt());
     if (bResult) {
-        return QString("已打开UDP接收端口：%1:%2").arg(m_pRecv->localAddress().toString()).arg(m_pRecv->localPort());
+        return tr("Started UDP Receiver - %1:%2").arg(m_pRecv->localAddress().toString()).arg(m_pRecv->localPort());
     } else {
-        return QString("[Error]无法打开UDP接收端口: %1").arg(m_pRecv->errorString());
+        return tr("[Error]Can not start UDP Receiver: %1").arg(m_pRecv->errorString());
     }
 }
 
 QString UDPApp::closeRecv() {
     m_pRecv->close();
-    return QString("已关闭UDP接收端口");
+    return tr("Closed UDP Receiver");
 }
 
 void UDPApp::updateUI() {
@@ -91,20 +91,20 @@ void UDPApp::onError(QAbstractSocket::SocketError socketError) {
     QString recvErr = m_pRecv->errorString();
     QString sendErr = m_pSend->errorString();
     if (recvErr != "") {
-        qstrError += QString("Listen error: %1, ").arg(recvErr);
+        qstrError += tr("Receive error: %1, ").arg(recvErr);
     }
     if (sendErr != "") {
-        qstrError += QString("Send error: %2, ").arg(sendErr);
+        qstrError += tr("Send error: %2, ").arg(sendErr);
     }
-    emit errorOccurred(QString("[Error]code: %1, description: %2").arg(socketError).arg(qstrError));
+    emit errorOccurred(tr("[Error]code: %1, description: %2").arg(socketError).arg(qstrError));
 }
 
 QString UDPApp::sendData(const QByteArray &data) {
     m_sendAddress = QString("%1:%2").arg(m_pcbxDestIP->currentText()).arg(m_pcbxDestPort->currentText());
     qint64 ret = m_pSend->writeDatagram(data, QHostAddress(m_pcbxDestIP->currentText()), m_pcbxDestPort->currentText().toInt());
     if (ret > -1) {
-        return QString("UDP发送数据成功: %1字节").arg(ret);
+        return tr("UDP Send Data Successfully: %1 Bytes").arg(ret);
     } else {
-        return QString("[Error]UDP发送数据失败: %1").arg(m_pRecv->errorString());
+        return tr("[Error]UDP Failed to Send Data: %1").arg(m_pRecv->errorString());
     }
 }

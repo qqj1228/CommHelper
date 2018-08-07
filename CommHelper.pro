@@ -43,3 +43,8 @@ FORMS += \
         mainwindow.ui
 
 RC_ICONS = CommHelper_128.ico
+
+TRANSLATIONS = zh_CN.ts
+
+DISTFILES += \
+    zh_CN.ts

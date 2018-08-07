@@ -9,8 +9,9 @@ Config::Config(QObject *parent) : QObject(parent)
     {
         QDir dir(QDir::home());
         dir.mkdir("." CFG_APP_NAME);
-        if (dir.cd("." CFG_APP_NAME))
+        if (dir.cd("." CFG_APP_NAME)) {
             path = dir.absolutePath();
+        }
     }
     QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
     m_pConfig = new QSettings(QSettings::IniFormat, QSettings::UserScope, CFG_APP_NAME, "", this);

@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pUi->statusBar->addWidget(m_pLStatus, 5);
     m_pUi->statusBar->addWidget(m_pLRecv, 1);
     m_pUi->statusBar->addWidget(m_pLSend, 1);
-    this->showStatus(QString("准备就绪"));
+    this->showStatus(tr("Ready"));
     this->showBytes();
     m_pMySerial = new SerialPort(m_pUi->tabSerial, this);
     m_pMyUDP = new UDPApp(m_pUi->tabUDP, this);
@@ -77,8 +77,8 @@ void MainWindow::showStatus(const QString &message) {
 }
 
 void MainWindow::showBytes() {
-    m_pLRecv->setText(QString("总接收：%1 字节").arg(m_iRecved));
-    m_pLSend->setText(QString("总发送：%1 字节").arg(m_iSended));
+    m_pLRecv->setText(tr("Recv all：%1 Bytes").arg(m_iRecved));
+    m_pLSend->setText(tr("Send all：%1 Bytes").arg(m_iSended));
 }
 
 QString MainWindow::getDisplayMessage(QByteArray &data, bool send, int enumTunnel) {
@@ -89,28 +89,28 @@ QString MainWindow::getDisplayMessage(QByteArray &data, bool send, int enumTunne
     switch (enumTunnel) {
     case MainWindow::SerialTab:
         if (send) {
-            message += QString("[Send to <SerialPort>\"%1\" - Bytes: %2]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
+            message += tr("[Send to <SerialPort>\"%1\" - %2 Bytes]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
         } else {
-            message += QString("[Recv from <SerialPort>\"%1\" - Bytes: %2]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
+            message += tr("[Recv from <SerialPort>\"%1\" - %2 Bytes]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
         }
         break;
     case MainWindow::TCPTab:
         break;
     case MainWindow::UDPTab:
         if (send) {
-            message += QString("[Send to <UDP>\"%1\" - Bytes: %2]: %3").arg(m_pMyUDP->getAddress(true)).arg(data.size()).arg(qstrMessage);
+            message += tr("[Send to <UDP>\"%1\" - %2 Bytes]: %3").arg(m_pMyUDP->getAddress(true)).arg(data.size()).arg(qstrMessage);
             this->addConfig(m_pUi->cbxDestIP);
             this->addConfig(m_pUi->cbxDestPort);
         } else {
-            message += QString("[Recv from <UDP>\"%1\" - Bytes: %2]: %3").arg(m_pMyUDP->getAddress(false)).arg(data.size()).arg(qstrMessage);
+            message += tr("[Recv from <UDP>\"%1\" - %2 Bytes]: %3").arg(m_pMyUDP->getAddress(false)).arg(data.size()).arg(qstrMessage);
         }
         break;
     }
 
-    message += QString("\n====== Hex: %1").arg(qstrHexMessage);
+    message += tr("\n====== Hex: %1").arg(qstrHexMessage);
     if (m_pUi->btnFilter->isChecked()) {
         QString qstrFilterMessage = CommHelper::getFilterString(data, CommHelper::getFilterList(m_pUi->cboxFilter->currentText()));
-        message += QString("\n++++++ Filter: %1").arg(qstrFilterMessage);
+        message += tr("\n++++++ Filter: %1").arg(qstrFilterMessage);
         QString str = m_pUi->cboxFilter->currentText().remove(QRegularExpression("[^\\d ,-]+"));
         m_pUi->cboxFilter->setCurrentText(str);
         this->addConfig(m_pUi->cboxFilter);
@@ -132,19 +132,6 @@ void MainWindow::addConfig(QComboBox *cmb) {
             cmb->removeItem(0);
             cmb->setCurrentIndex(cmb->count() - 1);
         }
-//        if (cmb == m_pUi->cboxSend) {
-//            m_pMyConfig->setHistory(cmb, QString(CFG_SEC_SENDED), cmb->currentText());
-//        } else if (cmb == m_pUi->cboxFilter) {
-//            m_pMyConfig->setHistory(cmb, QString(CFG_SEC_FILTER), cmb->currentText());
-//        } else if (cmb == m_pUi->cbxDestIP) {
-//            m_pMyConfig->setHistory(cmb, QString(CFG_SEC_DESTIP), cmb->currentText());
-//        } else if (cmb == m_pUi->cbxDestPort) {
-//            m_pMyConfig->setHistory(cmb, QString(CFG_SEC_DESTPORT), cmb->currentText());
-//        } else if (cmb == m_pUi->cbxRecvIP) {
-//            m_pMyConfig->setHistory(cmb, QString(CFG_SEC_RECVIP), cmb->currentText());
-//        } else if (cmb == m_pUi->cbxRecvPort) {
-//            m_pMyConfig->setHistory(cmb, QString(CFG_SEC_RECVPORT), cmb->currentText());
-//        }
     }
 }
 
