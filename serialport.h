@@ -22,6 +22,7 @@ signals:
     void bytesSended(qint64 bytes);
     void serialPortClosed();
     void hasRecved(QByteArray data, int enumTunnel);
+    void errorOccurred(QString errorStr);
 
 public slots:
     void handleError(QSerialPort::SerialPortError error);

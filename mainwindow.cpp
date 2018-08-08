@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
         m_pUi->btnOpen->setChecked(false);
     });
     connect(m_pMySerial, SIGNAL(hasRecved(QByteArray, int)), this, SLOT(onRecved(QByteArray, int)));
+    connect(m_pMySerial, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
     connect(m_pMyUDP, SIGNAL(hasRecved(QByteArray,int)), this, SLOT(onRecved(QByteArray,int)));
     connect(m_pMyUDP, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
     connect(m_pMyUDP, SIGNAL(bytesSended(qint64)), this, SLOT(onSended(qint64)));
@@ -239,6 +240,7 @@ void MainWindow::on_btnUDP_clicked(bool checked)
         message = this->m_pMyUDP->closeUDP();
         m_pUi->cbxRecvIP->setEnabled(true);
         m_pUi->cbxRecvPort->setEnabled(true);
+        m_pUi->listUDPConn->clear();
     }
     this->showStatus(message);
     if (message.indexOf("Error") >= 0) {
@@ -266,7 +268,7 @@ void MainWindow::on_btnTCPClient_clicked(bool checked)
     }
 }
 
-void MainWindow::on_checkCurrConn_stateChanged(int arg1)
+void MainWindow::on_checkUDPConn_stateChanged(int arg1)
 {
     if (arg1 == Qt::Checked) {
         m_pUi->cbxDestIP->setEnabled(false);

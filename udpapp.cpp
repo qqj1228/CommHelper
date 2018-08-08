@@ -15,6 +15,8 @@ void UDPApp::initUI() {
     this->m_pcbxDestPort = m_pTab->findChild<QComboBox*>(QStringLiteral("cbxDestPort"));
     this->m_pcbxRecvIP = m_pTab->findChild<QComboBox*>(QStringLiteral("cbxRecvIP"));
     this->m_pcbxRecvPort = m_pTab->findChild<QComboBox*>(QStringLiteral("cbxRecvPort"));
+    this->m_plistUDPConn = m_pTab->findChild<QListWidget*>(QStringLiteral("listUDPConn"));
+    this->m_pcheckConn = m_pTab->findChild<QCheckBox*>(QStringLiteral("checkUDPConn"));
 
     this->m_pcbxDestIP->setValidator(new QRegExpValidator(QRegExp("[0-9.]+"), this));
     this->m_pcbxDestPort->setValidator(new QIntValidator(1, 65535, this));
@@ -70,8 +72,13 @@ void UDPApp::readPendingDatagrams()
 {
     while (m_pUDP->hasPendingDatagrams()) {
         QNetworkDatagram datagram = m_pUDP->receiveDatagram();
-        m_recvAddress = QString("%1:%2").arg(datagram.senderAddress().toString()).arg(datagram.senderPort());
-        emit hasRecved(datagram.data(), MainWindow::UDPTab);
+        if (datagram.isValid()) {
+            m_recvAddress = QString("%1:%2").arg(datagram.senderAddress().toString()).arg(datagram.senderPort());
+            if (m_plistUDPConn->findItems(m_recvAddress, Qt::MatchFixedString).size() == 0) {
+                m_plistUDPConn->addItem(m_recvAddress);
+            }
+            emit hasRecved(datagram.data(), MainWindow::UDPTab);
+        }
     }
 }
 
@@ -88,9 +95,20 @@ void UDPApp::onError(QAbstractSocket::SocketError socketError) {
 }
 
 QString UDPApp::sendData(const QByteArray &data) {
+    qint64 ret = 0;
     if (m_pUDP != nullptr) {
-        m_sendAddress = QString("%1:%2").arg(m_pcbxDestIP->currentText()).arg(m_pcbxDestPort->currentText());
-        qint64 ret = m_pUDP->writeDatagram(data, QHostAddress(m_pcbxDestIP->currentText()), m_pcbxDestPort->currentText().toInt());
+        if (m_pcheckConn->isChecked()) {
+            QListWidgetItem *pitem = m_plistUDPConn->currentItem();
+            if (pitem == nullptr) {
+                return tr("[Error]No selected connection");
+            }
+            m_sendAddress = pitem->text();
+            int pos = m_sendAddress.indexOf(':');
+            ret = m_pUDP->writeDatagram(data, QHostAddress(m_sendAddress.left(pos)), m_sendAddress.mid(pos + 1).toInt());
+        } else {
+            m_sendAddress = QString("%1:%2").arg(m_pcbxDestIP->currentText()).arg(m_pcbxDestPort->currentText());
+            ret = m_pUDP->writeDatagram(data, QHostAddress(m_pcbxDestIP->currentText()), m_pcbxDestPort->currentText().toInt());
+        }
         if (ret > -1) {
             return tr("UDP Send Data Successfully: %1 Bytes").arg(ret);
         } else {

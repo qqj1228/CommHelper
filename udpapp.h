@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QUdpSocket>
 #include <QComboBox>
+#include <QListWidget>
+#include <QCheckBox>
 
 class UDPApp : public QObject
 {
@@ -38,6 +40,8 @@ public:
     QComboBox *m_pcbxDestPort = nullptr;
     QComboBox *m_pcbxRecvIP = nullptr;
     QComboBox *m_pcbxRecvPort = nullptr;
+    QListWidget *m_plistUDPConn = nullptr;
+    QCheckBox *m_pcheckConn = nullptr;
 };
 
 #endif // UDPAPP_H

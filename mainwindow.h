@@ -43,10 +43,8 @@ private slots:
     void on_btnClearText_clicked();
     void on_btnUDP_clicked(bool checked);
     void onShowError(QString qstrError);
-
     void on_btnTCPClient_clicked(bool checked);
-
-    void on_checkCurrConn_stateChanged(int arg1);
+    void on_checkUDPConn_stateChanged(int arg1);
 
 private:
     void showStatus(const QString &message);

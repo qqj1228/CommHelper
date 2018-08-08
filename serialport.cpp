@@ -113,15 +113,14 @@ QString SerialPort::getPort() {
 
 void SerialPort::handleError(QSerialPort::SerialPortError error)
 {
+    if (error == QSerialPort::NoError) {
+        return;
+    }
     if (error == QSerialPort::ResourceError) {
-        QMessageBox::critical(m_pParent, tr("SerialPort Error"), tr("Error code: %1\nDescription: %2").arg(error).arg(m_pSerial->errorString()));
         this->closeSerialPort();
         emit serialPortClosed();
-    } else if (error == QSerialPort::WriteError || error == QSerialPort::ReadError || error == QSerialPort::UnsupportedOperationError || error == QSerialPort::TimeoutError || error == QSerialPort::UnknownError) {
-        QMessageBox::critical(m_pParent, tr("SerialPort Error"), tr("Error code: %1\nDescription: %2").arg(error).arg(m_pSerial->errorString()));
-    } else if (error == QSerialPort::ParityError) {
-        QMessageBox::critical(m_pParent, tr("SerialPort Error"), tr("Error code: %1\nDescription: %2").arg(error).arg(m_pSerial->errorString()));
     }
+    emit errorOccurred(tr("[Error]code: %1, Description: %2").arg(error).arg(m_pSerial->errorString()));
 }
 
 void SerialPort::updatePort() {
