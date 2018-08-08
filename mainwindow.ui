@@ -91,6 +91,19 @@
       </item>
      </layout>
     </item>
+    <item row="1" column="2">
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>2</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" rowspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -249,6 +262,113 @@
        <attribute name="title">
         <string>TCP</string>
        </attribute>
+       <layout class="QFormLayout" name="formLayout_4">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Host IP</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxDestIP</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="cbxHostIP">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Host Port</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxDestPort</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="cbxHostPort">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="btnTCPClient">
+          <property name="text">
+           <string>Open TCP Client</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Listen IP</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxRecvIP</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QComboBox" name="cbxListenIP">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Listen Port</string>
+          </property>
+          <property name="buddy">
+           <cstring>cbxRecvPort</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QComboBox" name="cbxListenPort">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QPushButton" name="btnTCPServer">
+          <property name="text">
+           <string>Open TCP Server</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QListWidget" name="listConn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Current Connection</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tabUDP">
        <attribute name="title">
@@ -258,7 +378,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Destination IP</string>
+           <string>Dest IP</string>
           </property>
           <property name="buddy">
            <cstring>cbxDestIP</cstring>
@@ -275,7 +395,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>Destination Port</string>
+           <string>Dest Port</string>
           </property>
           <property name="buddy">
            <cstring>cbxDestPort</cstring>
@@ -292,7 +412,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_11">
           <property name="text">
-           <string>Receive IP</string>
+           <string>Local IP</string>
           </property>
           <property name="buddy">
            <cstring>cbxRecvIP</cstring>
@@ -309,7 +429,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>Receive Port</string>
+           <string>Local Port</string>
           </property>
           <property name="buddy">
            <cstring>cbxRecvPort</cstring>
@@ -326,13 +446,43 @@
         <item row="4" column="1">
          <widget class="QPushButton" name="btnUDP">
           <property name="text">
-           <string>Open Receive</string>
+           <string>Open UDP</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
           </property>
           <property name="flat">
            <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QListWidget" name="listWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QCheckBox" name="checkCurrConn">
+          <property name="text">
+           <string>Send to Current Connection</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QLabel" name="label_17">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Current Connections</string>
           </property>
          </widget>
         </item>
@@ -417,19 +567,6 @@
         </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QTextBrowser" name="textBrowser">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>2</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="lineWrapMode">
-       <enum>QTextEdit::NoWrap</enum>
-      </property>
      </widget>
     </item>
    </layout>

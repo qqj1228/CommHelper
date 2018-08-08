@@ -11,15 +11,13 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pLSend(new QLabel)
 {
     m_pUi->setupUi(this);
-//    m_pLStatus->setFrameShape(QFrame::StyledPanel);
-//    m_pLRecv->setFrameShape(QFrame::StyledPanel);
-//    m_pLSend->setFrameShape(QFrame::StyledPanel);
     m_pUi->statusBar->addWidget(m_pLStatus, 5);
     m_pUi->statusBar->addWidget(m_pLRecv, 1);
     m_pUi->statusBar->addWidget(m_pLSend, 1);
     this->showStatus(tr("Ready"));
     this->showBytes();
     m_pMySerial = new SerialPort(m_pUi->tabSerial, this);
+    m_pMyTCP = new TCPApp(m_pUi->tabTCP, this);
     m_pMyUDP = new UDPApp(m_pUi->tabUDP, this);
     m_pMySetup = new Setup(m_pUi->tabSetup, this);
     m_pMyConfig = new Config(this);
@@ -42,13 +40,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_pMyUDP, SIGNAL(hasRecved(QByteArray,int)), this, SLOT(onRecved(QByteArray,int)));
     connect(m_pMyUDP, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
     connect(m_pMyUDP, SIGNAL(bytesSended(qint64)), this, SLOT(onSended(qint64)));
+    connect(m_pMyTCP, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
+    connect(m_pMyTCP, SIGNAL(stateChanged(QString)), this, SLOT(onShowError(QString)));
 }
 
 MainWindow::~MainWindow()
 {
     delete m_pUi;
-//    delete m_pMySerial;
-//    delete m_pMyConfig;
 }
 
 
@@ -205,6 +203,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         m_pMySerial->updatePort();
         break;
     case MainWindow::TCPTab:
+        m_pMyTCP->updateUI();
         break;
     case MainWindow::UDPTab:
         m_pMyUDP->updateUI();
@@ -233,14 +232,20 @@ void MainWindow::on_btnUDP_clicked(bool checked)
 {
     QString message;
     if (checked) {
-        message = this->m_pMyUDP->initRecv();
+        message = this->m_pMyUDP->initUDP();
+        m_pUi->cbxRecvIP->setEnabled(false);
+        m_pUi->cbxRecvPort->setEnabled(false);
     } else {
-        message = this->m_pMyUDP->closeRecv();
+        message = this->m_pMyUDP->closeUDP();
+        m_pUi->cbxRecvIP->setEnabled(true);
+        m_pUi->cbxRecvPort->setEnabled(true);
     }
     this->showStatus(message);
     if (message.indexOf("Error") >= 0) {
         // error occurred
         m_pUi->btnOpen->setChecked(false);
+        m_pUi->cbxRecvIP->setEnabled(true);
+        m_pUi->cbxRecvPort->setEnabled(true);
     } else {
         // success
         this->addConfig(m_pUi->cbxRecvIP);
@@ -250,4 +255,24 @@ void MainWindow::on_btnUDP_clicked(bool checked)
 
 void MainWindow::onShowError(QString qstrError) {
     this->showStatus(qstrError);
+}
+
+void MainWindow::on_btnTCPClient_clicked(bool checked)
+{
+    if (checked) {
+        m_pMyTCP->initClient();
+    } else {
+        m_pMyTCP->closeClient();
+    }
+}
+
+void MainWindow::on_checkCurrConn_stateChanged(int arg1)
+{
+    if (arg1 == Qt::Checked) {
+        m_pUi->cbxDestIP->setEnabled(false);
+        m_pUi->cbxDestPort->setEnabled(false);
+    } else {
+        m_pUi->cbxDestIP->setEnabled(true);
+        m_pUi->cbxDestPort->setEnabled(true);
+    }
 }

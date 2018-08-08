@@ -69,59 +69,94 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="255"/>
+        <location filename="mainwindow.ui" line="256"/>
+        <source>Host IP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="273"/>
+        <source>Host Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="290"/>
+        <source>Open TCP Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="300"/>
+        <source>Listen IP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="317"/>
+        <source>Listen Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="334"/>
+        <source>Open TCP Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="347"/>
+        <source>Connetions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="355"/>
         <source>UDP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="261"/>
+        <location filename="mainwindow.ui" line="361"/>
         <source>Destination IP</source>
         <translation>目的IP地址</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="278"/>
+        <location filename="mainwindow.ui" line="378"/>
         <source>Destination Port</source>
         <translation>目的端口号</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="295"/>
+        <location filename="mainwindow.ui" line="395"/>
         <source>Receive IP</source>
         <translation>接收IP地址</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="312"/>
+        <location filename="mainwindow.ui" line="412"/>
         <source>Receive Port</source>
         <translation>接收端口号</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="329"/>
+        <location filename="mainwindow.ui" line="429"/>
         <source>Open Receive</source>
         <translation>打开接收UDP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="343"/>
+        <location filename="mainwindow.ui" line="443"/>
         <source>Setup</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="349"/>
-        <location filename="mainwindow.ui" line="365"/>
+        <location filename="mainwindow.ui" line="449"/>
+        <location filename="mainwindow.ui" line="465"/>
         <source>Send Color</source>
         <translation>发送颜色</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="372"/>
-        <location filename="mainwindow.ui" line="388"/>
+        <location filename="mainwindow.ui" line="472"/>
+        <location filename="mainwindow.ui" line="488"/>
         <source>Receive Color</source>
         <translation>接收颜色</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="395"/>
+        <location filename="mainwindow.ui" line="495"/>
         <source>Font Size (pt)</source>
         <translation>显示字体大小 (pt)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="408"/>
+        <location filename="mainwindow.ui" line="508"/>
         <source>Recent Records</source>
         <translation>历史记录数目</translation>
     </message>
@@ -131,44 +166,44 @@
         <translation>准备就绪</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="80"/>
+        <location filename="mainwindow.cpp" line="83"/>
         <source>Recv all：%1 Bytes</source>
         <translation>总接收: %1 字节</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="81"/>
+        <location filename="mainwindow.cpp" line="84"/>
         <source>Send all：%1 Bytes</source>
         <translation>总发送: %1 字节</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="92"/>
+        <location filename="mainwindow.cpp" line="95"/>
         <source>[Send to &lt;SerialPort&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;串口&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="94"/>
+        <location filename="mainwindow.cpp" line="97"/>
         <source>[Recv from &lt;SerialPort&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;串口&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="101"/>
+        <location filename="mainwindow.cpp" line="104"/>
         <source>[Send to &lt;UDP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;UDP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="105"/>
+        <location filename="mainwindow.cpp" line="108"/>
         <source>[Recv from &lt;UDP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;UDP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="110"/>
+        <location filename="mainwindow.cpp" line="113"/>
         <source>
 ====== Hex: %1</source>
         <translation>
 ====== 十六进制: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="113"/>
+        <location filename="mainwindow.cpp" line="116"/>
         <source>
 ++++++ Filter: %1</source>
         <translation>
@@ -240,6 +275,64 @@ Description: %2</source>
     </message>
 </context>
 <context>
+    <name>TCPApp</name>
+    <message>
+        <location filename="tcpapp.cpp" line="62"/>
+        <source>Client error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="65"/>
+        <source>Server error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="67"/>
+        <source>[Error]code: %1, description: %2</source>
+        <translation type="unfinished">[Error]错误码: %1, 错误描述: %2</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="74"/>
+        <source>TCP is disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="77"/>
+        <source>TCP is performing a host name lookup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="80"/>
+        <source>TCP has started establishing a connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="83"/>
+        <source>TCP connection: %1:%2 is established</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="86"/>
+        <source>TCP is bound to an address and port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="89"/>
+        <source>TCP is about to close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="92"/>
+        <source>TCP is listening</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="95"/>
+        <source>Unknow state</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UDPApp</name>
     <message>
         <location filename="udpapp.cpp" line="39"/>
@@ -258,13 +351,15 @@ Description: %2</source>
     </message>
     <message>
         <location filename="udpapp.cpp" line="94"/>
-        <source>Receive error: %1, </source>
-        <translation>接收出错: %1, </translation>
+        <source>Receive error: %1</source>
+        <oldsource>Receive error: %1, </oldsource>
+        <translation type="unfinished">接收出错: %1, </translation>
     </message>
     <message>
         <location filename="udpapp.cpp" line="97"/>
-        <source>Send error: %2, </source>
-        <translation>发送出错: %2, </translation>
+        <source>Send error: %1</source>
+        <oldsource>Send error: %2, </oldsource>
+        <translation type="unfinished">发送出错: %2, </translation>
     </message>
     <message>
         <location filename="udpapp.cpp" line="99"/>

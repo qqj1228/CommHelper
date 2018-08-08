@@ -10,11 +10,10 @@ class UDPApp : public QObject
     Q_OBJECT
 public:
     explicit UDPApp(QWidget *tab, QObject *parent = nullptr);
-    ~UDPApp();
     void updateUI();
     QString getAddress(bool bSend);
-    QString initRecv();
-    QString closeRecv();
+    QString initUDP();
+    QString closeUDP();
     QString sendData(const QByteArray &data);
 
 signals:
@@ -30,8 +29,7 @@ protected:
     void initUI();
 
     QWidget *m_pTab = nullptr;
-    QUdpSocket *m_pSend = nullptr;
-    QUdpSocket *m_pRecv = nullptr;
+    QUdpSocket *m_pUDP = nullptr;
     QString m_sendAddress;
     QString m_recvAddress;
 

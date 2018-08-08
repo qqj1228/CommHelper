@@ -29,7 +29,8 @@ SOURCES += \
     serialport.cpp \
     config.cpp \
     setup.cpp \
-    udpapp.cpp
+    udpapp.cpp \
+    tcpapp.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -37,7 +38,8 @@ HEADERS += \
     utility.h \
     config.h \
     setup.h \
-    udpapp.h
+    udpapp.h \
+    tcpapp.h
 
 FORMS += \
         mainwindow.ui

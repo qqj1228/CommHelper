@@ -5,6 +5,7 @@
 #include <QCloseEvent>
 #include "serialport.h"
 #include "udpapp.h"
+#include "tcpapp.h"
 #include "setup.h"
 #include "config.h"
 
@@ -43,6 +44,10 @@ private slots:
     void on_btnUDP_clicked(bool checked);
     void onShowError(QString qstrError);
 
+    void on_btnTCPClient_clicked(bool checked);
+
+    void on_checkCurrConn_stateChanged(int arg1);
+
 private:
     void showStatus(const QString &message);
     void showBytes();
@@ -55,6 +60,7 @@ private:
     QLabel *m_pLSend = nullptr;
     SerialPort *m_pMySerial = nullptr;
     UDPApp *m_pMyUDP = nullptr;
+    TCPApp *m_pMyTCP = nullptr;
     Setup *m_pMySetup = nullptr;
     Config *m_pMyConfig = nullptr;
     QByteArray m_send;
