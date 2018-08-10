@@ -13,27 +13,25 @@ class UDPApp : public QObject
 public:
     explicit UDPApp(QWidget *tab, QObject *parent = nullptr);
     void updateUI();
-    QString getAddress(bool bSend);
     QString initUDP();
     QString closeUDP();
     QString sendData(const QByteArray &data);
 
 signals:
-    void hasRecved(QByteArray data, int enumTunnel);
+    void hasRecved(QByteArray data, QString address, int enumTunnel);
     void errorOccurred(QString errorStr);
-    void bytesSended(qint64 bytes);
+    void bytesSended(qint64 bytes, QString address);
 
 public slots:
     void readPendingDatagrams();
     void onError(QAbstractSocket::SocketError socketError);
+    void onBytesSended(qint64 bytes);
 
 protected:
     void initUI();
 
     QWidget *m_pTab = nullptr;
     QUdpSocket *m_pUDP = nullptr;
-    QString m_sendAddress;
-    QString m_recvAddress;
 
 public:
     QComboBox *m_pcbxDestIP = nullptr;

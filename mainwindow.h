@@ -9,6 +9,8 @@
 #include "setup.h"
 #include "config.h"
 
+#define MAX_STATUS_SIZE 100
+
 class QLabel;
 
 namespace Ui {
@@ -36,21 +38,25 @@ protected:
 private slots:
     void on_btnOpen_clicked(bool checked);
     void on_btnSend_clicked();
-    void onSended(qint64 bytes);
+    void onSended(qint64 bytes, QString address);
     void on_btnClear_clicked();
     void on_tabWidget_currentChanged(int index);
-    void onRecved(QByteArray data, int enumTunnel);
+    void onRecved(QByteArray data, QString address, int enumTunnel);
     void on_btnClearText_clicked();
     void on_btnUDP_clicked(bool checked);
     void onShowError(QString qstrError);
     void on_btnTCPClient_clicked(bool checked);
     void on_checkUDPConn_stateChanged(int arg1);
+    void onTCPConnected(QString qstrSender);
+    void onTCPDisconnected(QString qstrSender);
+    void on_btnTCPServer_clicked(bool checked);
+    void on_btnDisconn_clicked();
 
 private:
-    void showStatus(const QString &message);
+    void showStatus(QString message);
     void showBytes();
-    QString getDisplayMessage(QByteArray &data, bool send, int enumTunnel);
-    void addConfig(QComboBox *cmb);
+    QString getDisplayMessage(const QByteArray &data, const QString &address, bool send, int enumTunnel);
+    void addComboBoxItem(QComboBox *cmb);
 
     Ui::MainWindow *m_pUi = nullptr;
     QLabel *m_pLStatus = nullptr;

@@ -30,8 +30,8 @@ QString UDPApp::initUDP() {
     if (bResult) {
         connect(m_pUDP, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
         connect(m_pUDP, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onError(QAbstractSocket::SocketError)));
-        connect(m_pUDP, SIGNAL(bytesWritten(qint64)), this, SIGNAL(bytesSended(qint64)));
-        return tr("Open UDP on %1:%2").arg(m_pUDP->localAddress().toString()).arg(m_pUDP->localPort());
+        connect(m_pUDP, SIGNAL(bytesWritten(qint64)), this, SLOT(onBytesSended(qint64)));
+        return tr("Open UDP on \"%1:%2\"").arg(m_pUDP->localAddress().toString()).arg(m_pUDP->localPort());
     } else {
         return tr("[Error]Can not open UDP: %1").arg(m_pUDP->errorString());
     }
@@ -73,20 +73,12 @@ void UDPApp::readPendingDatagrams()
     while (m_pUDP->hasPendingDatagrams()) {
         QNetworkDatagram datagram = m_pUDP->receiveDatagram();
         if (datagram.isValid()) {
-            m_recvAddress = QString("%1:%2").arg(datagram.senderAddress().toString()).arg(datagram.senderPort());
-            if (m_plistUDPConn->findItems(m_recvAddress, Qt::MatchFixedString).size() == 0) {
-                m_plistUDPConn->addItem(m_recvAddress);
+            QString address = QString("%1:%2").arg(datagram.senderAddress().toString()).arg(datagram.senderPort());
+            if (m_plistUDPConn->findItems(address, Qt::MatchFixedString).size() == 0) {
+                m_plistUDPConn->addItem(address);
             }
-            emit hasRecved(datagram.data(), MainWindow::UDPTab);
+            emit hasRecved(datagram.data(), address, MainWindow::UDPTab);
         }
-    }
-}
-
-QString UDPApp::getAddress(bool bSend) {
-    if (bSend) {
-        return m_sendAddress;
-    } else {
-        return m_recvAddress;
     }
 }
 
@@ -95,6 +87,7 @@ void UDPApp::onError(QAbstractSocket::SocketError socketError) {
 }
 
 QString UDPApp::sendData(const QByteArray &data) {
+    QString address;
     qint64 ret = 0;
     if (m_pUDP != nullptr) {
         if (m_pcheckConn->isChecked()) {
@@ -102,11 +95,10 @@ QString UDPApp::sendData(const QByteArray &data) {
             if (pitem == nullptr) {
                 return tr("[Error]No selected connection");
             }
-            m_sendAddress = pitem->text();
-            int pos = m_sendAddress.indexOf(':');
-            ret = m_pUDP->writeDatagram(data, QHostAddress(m_sendAddress.left(pos)), m_sendAddress.mid(pos + 1).toInt());
+            address = pitem->text();
+            int pos = address.indexOf(':');
+            ret = m_pUDP->writeDatagram(data, QHostAddress(address.left(pos)), address.mid(pos + 1).toInt());
         } else {
-            m_sendAddress = QString("%1:%2").arg(m_pcbxDestIP->currentText()).arg(m_pcbxDestPort->currentText());
             ret = m_pUDP->writeDatagram(data, QHostAddress(m_pcbxDestIP->currentText()), m_pcbxDestPort->currentText().toInt());
         }
         if (ret > -1) {
@@ -117,4 +109,14 @@ QString UDPApp::sendData(const QByteArray &data) {
     } else {
         return tr("[Error]UDP not open");
     }
+}
+
+void UDPApp::onBytesSended(qint64 bytes) {
+    QString address;
+    if (m_pcheckConn->isChecked()) {
+        address = m_plistUDPConn->currentItem()->text();
+    } else {
+        address = QString("%1:%2").arg(m_pcbxDestIP->currentText()).arg(m_pcbxDestPort->currentText());
+    }
+    emit bytesSended(bytes, address);
 }

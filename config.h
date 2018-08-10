@@ -6,6 +6,7 @@
 #include <QComboBox>
 #include "serialport.h"
 #include "setup.h"
+#include "tcpapp.h"
 #include "udpapp.h"
 
 #define CFG_APP_NAME "CommHelper"
@@ -63,6 +64,8 @@ public:
     void loadSetup(Setup *pMySetup);
     void saveUDP(const UDPApp *pMyUDP);
     void loadUDP(UDPApp *pMyUDP);
+    void saveTCP(const TCPApp *pMyTCP);
+    void loadTCP(TCPApp *pMyTCP);
 
 signals:
 

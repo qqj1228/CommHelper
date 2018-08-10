@@ -12,7 +12,7 @@ SerialPort::SerialPort(QWidget *tab, QObject *parent) :
     initComboBox();
     initParameters();
 
-    connect(m_pSerial, SIGNAL(bytesWritten(qint64)), this, SIGNAL(bytesSended(qint64)));
+    connect(m_pSerial, SIGNAL(bytesWritten(qint64)), this, SLOT(onBytesSended(qint64)));
     connect(m_pSerial, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
     connect(m_pSerial, &QSerialPort::readyRead, this, &SerialPort::recvData);
 }
@@ -107,10 +107,6 @@ QString SerialPort::sendData(const QByteArray &data) {
     return message;
 }
 
-QString SerialPort::getPort() {
-    return m_pSerial->portName();
-}
-
 void SerialPort::handleError(QSerialPort::SerialPortError error)
 {
     if (error == QSerialPort::NoError) {
@@ -135,6 +131,10 @@ void SerialPort::updatePort() {
 
 QString SerialPort::recvData() {
     const QByteArray data = m_pSerial->readAll();
-    emit hasRecved(data, MainWindow::SerialTab);
+    emit hasRecved(data, m_pSerial->portName(), MainWindow::SerialTab);
     return tr("Serial Port: %1, Recv: %2 Bytes").arg(m_pSerial->portName()).arg(data.size());
+}
+
+void SerialPort::onBytesSended(qint64 bytes) {
+    emit bytesSended(bytes, m_pSerial->portName());
 }

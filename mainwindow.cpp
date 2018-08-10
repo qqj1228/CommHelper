@@ -27,22 +27,32 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pMyConfig->loadHistory(m_pUi->cbxDestPort, CFG_SEC_DESTPORT);
     m_pMyConfig->loadHistory(m_pUi->cbxRecvIP, CFG_SEC_RECVIP);
     m_pMyConfig->loadHistory(m_pUi->cbxRecvPort, CFG_SEC_RECVPORT);
+    m_pMyConfig->loadHistory(m_pUi->cbxHostIP, CFG_SEC_HOSTIP);
+    m_pMyConfig->loadHistory(m_pUi->cbxHostPort, CFG_SEC_HOSTPORT);
+    m_pMyConfig->loadHistory(m_pUi->cbxListenIP, CFG_SEC_LISTENIP);
+    m_pMyConfig->loadHistory(m_pUi->cbxListenPort, CFG_SEC_LISTENPORT);
     m_pMyConfig->loadSerialPort(m_pMySerial);
+    m_pMyTCP->updateUI();
+    m_pMyConfig->loadTCP(m_pMyTCP);
     m_pMyUDP->updateUI();
     m_pMyConfig->loadUDP(m_pMyUDP);
     m_pMyConfig->loadSetup(m_pMySetup);
 
-    connect(m_pMySerial, SIGNAL(bytesSended(qint64)), this, SLOT(onSended(qint64)));
-    connect(m_pMySerial, &SerialPort::serialPortClosed, [=](){
+    connect(m_pMySerial, SIGNAL(bytesSended(qint64, QString)), this, SLOT(onSended(qint64, QString)));
+    connect(m_pMySerial, &SerialPort::serialPortClosed, [&](){
         m_pUi->btnOpen->setChecked(false);
     });
-    connect(m_pMySerial, SIGNAL(hasRecved(QByteArray, int)), this, SLOT(onRecved(QByteArray, int)));
+    connect(m_pMySerial, SIGNAL(hasRecved(QByteArray, QString, int)), this, SLOT(onRecved(QByteArray, QString, int)));
     connect(m_pMySerial, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
-    connect(m_pMyUDP, SIGNAL(hasRecved(QByteArray,int)), this, SLOT(onRecved(QByteArray,int)));
+    connect(m_pMyUDP, SIGNAL(hasRecved(QByteArray, QString, int)), this, SLOT(onRecved(QByteArray, QString, int)));
     connect(m_pMyUDP, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
-    connect(m_pMyUDP, SIGNAL(bytesSended(qint64)), this, SLOT(onSended(qint64)));
+    connect(m_pMyUDP, SIGNAL(bytesSended(qint64, QString)), this, SLOT(onSended(qint64, QString)));
     connect(m_pMyTCP, SIGNAL(errorOccurred(QString)), this, SLOT(onShowError(QString)));
     connect(m_pMyTCP, SIGNAL(stateChanged(QString)), this, SLOT(onShowError(QString)));
+    connect(m_pMyTCP, SIGNAL(connected(QString)), this, SLOT(onTCPConnected(QString)));
+    connect(m_pMyTCP, SIGNAL(disconnected(QString)), this, SLOT(onTCPDisconnected(QString)));
+    connect(m_pMyTCP, SIGNAL(hasRecved(QByteArray, QString, int)), this, SLOT(onRecved(QByteArray, QString, int)));
+    connect(m_pMyTCP, SIGNAL(bytesSended(qint64, QString)), this, SLOT(onSended(qint64, QString)));
 }
 
 MainWindow::~MainWindow()
@@ -61,16 +71,24 @@ void MainWindow::closeEvent(QCloseEvent *event)
     m_pMyConfig->saveHistory(m_pUi->cbxDestPort, QString(CFG_SEC_DESTPORT));
     m_pMyConfig->saveHistory(m_pUi->cbxRecvIP, QString(CFG_SEC_RECVIP));
     m_pMyConfig->saveHistory(m_pUi->cbxRecvPort, QString(CFG_SEC_RECVPORT));
+    m_pMyConfig->saveHistory(m_pUi->cbxHostIP, QString(CFG_SEC_HOSTIP));
+    m_pMyConfig->saveHistory(m_pUi->cbxHostPort, QString(CFG_SEC_HOSTPORT));
+    m_pMyConfig->saveHistory(m_pUi->cbxListenIP, QString(CFG_SEC_LISTENIP));
+    m_pMyConfig->saveHistory(m_pUi->cbxListenPort, QString(CFG_SEC_LISTENPORT));
+    m_pMyConfig->saveTCP(m_pMyTCP);
     m_pMyConfig->saveUDP(m_pMyUDP);
     m_pMyConfig->saveSetup(m_pMySetup);
     event->accept();
 }
 
-void MainWindow::showStatus(const QString &message) {
+void MainWindow::showStatus(QString message) {
     if (message.indexOf("Error") < 0) {
         m_pLStatus->setStyleSheet("color: black;");
     } else {
         m_pLStatus->setStyleSheet("color: red;");
+    }
+    if (message.size() > MAX_STATUS_SIZE) {
+        message.resize(MAX_STATUS_SIZE);
     }
     m_pLStatus->setText(message);
 }
@@ -80,7 +98,7 @@ void MainWindow::showBytes() {
     m_pLSend->setText(tr("Send all：%1 Bytes").arg(m_iSended));
 }
 
-QString MainWindow::getDisplayMessage(QByteArray &data, bool send, int enumTunnel) {
+QString MainWindow::getDisplayMessage(const QByteArray &data, const QString &address, bool send, int enumTunnel) {
     QString message(QTime::currentTime().toString("HH:mm:ss "));
     QString qstrMessage = CommHelper::getDisplayString(data);
     QString qstrHexMessage = CommHelper::getHexString(data);
@@ -88,20 +106,25 @@ QString MainWindow::getDisplayMessage(QByteArray &data, bool send, int enumTunne
     switch (enumTunnel) {
     case MainWindow::SerialTab:
         if (send) {
-            message += tr("[Send to <SerialPort>\"%1\" - %2 Bytes]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
+            message += tr("[Send to <SerialPort>\"%1\" - %2 Bytes]: %3").arg(address).arg(data.size()).arg(qstrMessage);
         } else {
-            message += tr("[Recv from <SerialPort>\"%1\" - %2 Bytes]: %3").arg(m_pMySerial->getPort()).arg(data.size()).arg(qstrMessage);
+            message += tr("[Recv from <SerialPort>\"%1\" - %2 Bytes]: %3").arg(address).arg(data.size()).arg(qstrMessage);
         }
         break;
     case MainWindow::TCPTab:
+        if (send) {
+            message += tr("[Send to <TCP>\"%1\" - %2 Bytes]: %3").arg(address).arg(data.size()).arg(qstrMessage);
+        } else {
+            message += tr("[Recv from <TCP>\"%1\" - %2 Bytes]: %3").arg(address).arg(data.size()).arg(qstrMessage);
+        }
         break;
     case MainWindow::UDPTab:
         if (send) {
-            message += tr("[Send to <UDP>\"%1\" - %2 Bytes]: %3").arg(m_pMyUDP->getAddress(true)).arg(data.size()).arg(qstrMessage);
-            this->addConfig(m_pUi->cbxDestIP);
-            this->addConfig(m_pUi->cbxDestPort);
+            message += tr("[Send to <UDP>\"%1\" - %2 Bytes]: %3").arg(address).arg(data.size()).arg(qstrMessage);
+            this->addComboBoxItem(m_pUi->cbxDestIP);
+            this->addComboBoxItem(m_pUi->cbxDestPort);
         } else {
-            message += tr("[Recv from <UDP>\"%1\" - %2 Bytes]: %3").arg(m_pMyUDP->getAddress(false)).arg(data.size()).arg(qstrMessage);
+            message += tr("[Recv from <UDP>\"%1\" - %2 Bytes]: %3").arg(address).arg(data.size()).arg(qstrMessage);
         }
         break;
     }
@@ -112,7 +135,7 @@ QString MainWindow::getDisplayMessage(QByteArray &data, bool send, int enumTunne
         message += tr("\n++++++ Filter: %1").arg(qstrFilterMessage);
         QString str = m_pUi->cboxFilter->currentText().remove(QRegularExpression("[^\\d ,-]+"));
         m_pUi->cboxFilter->setCurrentText(str);
-        this->addConfig(m_pUi->cboxFilter);
+        this->addComboBoxItem(m_pUi->cboxFilter);
     }
     CommHelper::escapeHtml(message);
     if (send) {
@@ -124,7 +147,7 @@ QString MainWindow::getDisplayMessage(QByteArray &data, bool send, int enumTunne
     return message;
 }
 
-void MainWindow::addConfig(QComboBox *cmb) {
+void MainWindow::addComboBoxItem(QComboBox *cmb) {
     if (cmb->findText(cmb->currentText()) == -1) {
         cmb->addItem(cmb->currentText());
         if (cmb->count() > m_pMySetup->m_iHistory) {
@@ -153,13 +176,13 @@ void MainWindow::on_btnSend_clicked()
 {
     QString message;
     try {
-//        m_pMySerial->writeData(m_pUi->cboxSend->currentText().toLocal8Bit());
         m_send = CommHelper::convert2Raw(m_pUi->cboxSend->currentText());
         switch (m_pUi->tabWidget->currentIndex()) {
         case MainWindow::SerialTab:
             message = m_pMySerial->sendData(m_send);
             break;
         case MainWindow::TCPTab:
+            message = m_pMyTCP->sendData(m_send);
             break;
         case MainWindow::UDPTab:
             message = m_pMyUDP->sendData(m_send);
@@ -171,24 +194,25 @@ void MainWindow::on_btnSend_clicked()
     this->showStatus(message);
 }
 
-void MainWindow::onSended(qint64 bytes) {
+void MainWindow::onSended(qint64 bytes, QString address) {
     QString message;
 
     switch (m_pUi->tabWidget->currentIndex()) {
     case MainWindow::SerialTab:
-        message = this->getDisplayMessage(m_send, true, MainWindow::SerialTab);
+        message = this->getDisplayMessage(m_send, address, true, MainWindow::SerialTab);
         break;
     case MainWindow::TCPTab:
+        message = this->getDisplayMessage(m_send, address, true, MainWindow::TCPTab);
         break;
     case MainWindow::UDPTab:
-        message = this->getDisplayMessage(m_send, true, MainWindow::UDPTab);
+        message = this->getDisplayMessage(m_send, address, true, MainWindow::UDPTab);
         break;
     }
 
     m_pUi->textBrowser->append(message);
     m_iSended += bytes;
     this->showBytes();
-    this->addConfig(m_pUi->cboxSend);
+    this->addComboBoxItem(m_pUi->cboxSend);
 }
 
 void MainWindow::on_btnClear_clicked()
@@ -217,8 +241,8 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     }
 }
 
-void MainWindow::onRecved(QByteArray data, int enumTunnel) {
-    QString message = this->getDisplayMessage(data, false, enumTunnel);
+void MainWindow::onRecved(QByteArray data, QString address, int enumTunnel) {
+    QString message = this->getDisplayMessage(data, address, false, enumTunnel);
     m_pUi->textBrowser->append(message);
     m_iRecved += data.size();
     this->showBytes();
@@ -250,22 +274,13 @@ void MainWindow::on_btnUDP_clicked(bool checked)
         m_pUi->cbxRecvPort->setEnabled(true);
     } else {
         // success
-        this->addConfig(m_pUi->cbxRecvIP);
-        this->addConfig(m_pUi->cbxRecvPort);
+        this->addComboBoxItem(m_pUi->cbxRecvIP);
+        this->addComboBoxItem(m_pUi->cbxRecvPort);
     }
 }
 
 void MainWindow::onShowError(QString qstrError) {
     this->showStatus(qstrError);
-}
-
-void MainWindow::on_btnTCPClient_clicked(bool checked)
-{
-    if (checked) {
-        m_pMyTCP->initClient();
-    } else {
-        m_pMyTCP->closeClient();
-    }
 }
 
 void MainWindow::on_checkUDPConn_stateChanged(int arg1)
@@ -277,4 +292,65 @@ void MainWindow::on_checkUDPConn_stateChanged(int arg1)
         m_pUi->cbxDestIP->setEnabled(true);
         m_pUi->cbxDestPort->setEnabled(true);
     }
+}
+
+void MainWindow::on_btnTCPClient_clicked(bool checked)
+{
+    if (checked) {
+        m_pMyTCP->initClient();
+    } else {
+        m_pMyTCP->closeClient();
+    }
+}
+
+void MainWindow::onTCPConnected(QString qstrSender) {
+    if (qstrSender == "TCPClient") {
+        this->addComboBoxItem(m_pUi->cbxHostIP);
+        this->addComboBoxItem(m_pUi->cbxHostPort);
+        m_pUi->cbxHostIP->setEnabled(false);
+        m_pUi->cbxHostPort->setEnabled(false);
+        m_pUi->btnTCPServer->setEnabled(false);
+    }
+}
+
+void MainWindow::onTCPDisconnected(QString qstrSender) {
+    if (qstrSender == "TCPClient") {
+        m_pUi->btnTCPClient->setChecked(false);
+        m_pUi->cbxHostIP->setEnabled(true);
+        m_pUi->cbxHostPort->setEnabled(true);
+        m_pUi->btnTCPServer->setEnabled(true);
+    }
+}
+
+void MainWindow::on_btnTCPServer_clicked(bool checked)
+{
+    QString message;
+    if (checked) {
+        message = m_pMyTCP->initServer();
+        m_pUi->cbxListenIP->setEnabled(false);
+        m_pUi->cbxListenPort->setEnabled(false);
+        m_pUi->btnTCPClient->setEnabled(false);
+    } else {
+        message = m_pMyTCP->closeServer();
+        m_pUi->cbxListenIP->setEnabled(true);
+        m_pUi->cbxListenPort->setEnabled(true);
+        m_pUi->btnTCPClient->setEnabled(true);
+    }
+    this->showStatus(message);
+    if (message.indexOf("Error") >= 0) {
+        // error occurred
+        m_pUi->btnTCPServer->setChecked(false);
+        m_pUi->cbxListenIP->setEnabled(true);
+        m_pUi->cbxListenPort->setEnabled(true);
+        m_pUi->btnTCPClient->setEnabled(true);
+    } else {
+        // success
+        this->addComboBoxItem(m_pUi->cbxListenIP);
+        this->addComboBoxItem(m_pUi->cbxListenPort);
+    }
+}
+
+void MainWindow::on_btnDisconn_clicked()
+{
+    this->showStatus(m_pMyTCP->listDisconnect());
 }

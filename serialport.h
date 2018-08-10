@@ -15,17 +15,17 @@ public:
     QString closeSerialPort();
     QString sendData(const QByteArray &data);
     QString recvData();
-    QString getPort();
     void updatePort();
 
 signals:
-    void bytesSended(qint64 bytes);
+    void bytesSended(qint64 bytes, QString address);
     void serialPortClosed();
-    void hasRecved(QByteArray data, int enumTunnel);
+    void hasRecved(QByteArray data, QString address, int enumTunnel);
     void errorOccurred(QString errorStr);
 
 public slots:
     void handleError(QSerialPort::SerialPortError error);
+    void onBytesSended(qint64 bytes);
 
 private:
     void initComboBox();

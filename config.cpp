@@ -127,3 +127,21 @@ void Config::loadUDP(UDPApp *pMyUDP) {
     pMyUDP->m_pcbxRecvPort->setCurrentIndex(m_pConfig->value(CFG_KEY_RECVPORT, -1).toInt());
     m_pConfig->endGroup();
 }
+
+void Config::saveTCP(const TCPApp *pMyTCP) {
+    m_pConfig->beginGroup(CFG_SEC_TCP);
+    m_pConfig->setValue(CFG_KEY_HOSTIP, pMyTCP->m_pcbxHostIP->currentIndex());
+    m_pConfig->setValue(CFG_KEY_HOSTPORT, pMyTCP->m_pcbxHostPort->currentIndex());
+    m_pConfig->setValue(CFG_KEY_LISTENIP, pMyTCP->m_pcbxListenIP->currentIndex());
+    m_pConfig->setValue(CFG_KEY_LISTENPORT, pMyTCP->m_pcbxListenPort->currentIndex());
+    m_pConfig->endGroup();
+}
+
+void Config::loadTCP(TCPApp *pMyTCP) {
+    m_pConfig->beginGroup(CFG_SEC_TCP);
+    pMyTCP->m_pcbxHostIP->setCurrentIndex(m_pConfig->value(CFG_KEY_HOSTIP, -1).toInt());
+    pMyTCP->m_pcbxHostPort->setCurrentIndex(m_pConfig->value(CFG_KEY_HOSTPORT, -1).toInt());
+    pMyTCP->m_pcbxListenIP->setCurrentIndex(m_pConfig->value(CFG_KEY_LISTENIP, -1).toInt());
+    pMyTCP->m_pcbxListenPort->setCurrentIndex(m_pConfig->value(CFG_KEY_LISTENPORT, -1).toInt());
+    m_pConfig->endGroup();
+}
