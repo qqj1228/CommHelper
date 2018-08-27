@@ -105,7 +105,7 @@ void Config::loadSetup(Setup *pMySetup) {
     m_pConfig->beginGroup(CFG_SEC_SETUP);
     pMySetup->m_qclrSend = m_pConfig->value(CFG_KEY_SENDCLR, "blue").value<QColor>();
     pMySetup->m_qclrRecv = m_pConfig->value(CFG_KEY_RECVCLR, "green").value<QColor>();
-    pMySetup->m_fontSize = m_pConfig->value(CFG_KEY_FONTSIZE, "10").toString();
+    pMySetup->m_fontSize = m_pConfig->value(CFG_KEY_FONTSIZE, "9").toString();
     pMySetup->m_iHistory = m_pConfig->value(CFG_KEY_HISTORY, "10").toInt();
     m_pConfig->endGroup();
 }
