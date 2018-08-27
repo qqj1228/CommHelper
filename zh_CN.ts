@@ -24,186 +24,231 @@
         <translation>清除发送</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="113"/>
+        <location filename="mainwindow.ui" line="126"/>
         <source>Serial Port</source>
         <translation>串口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="119"/>
+        <location filename="mainwindow.ui" line="132"/>
         <source>Port Name</source>
         <translation>串口名</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="139"/>
+        <location filename="mainwindow.ui" line="152"/>
         <source>Baud Rate</source>
         <translation>波特率</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="156"/>
+        <location filename="mainwindow.ui" line="169"/>
         <source>Data Bits</source>
         <translation>数据位</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="176"/>
+        <location filename="mainwindow.ui" line="189"/>
         <source>Parity</source>
         <translation>奇偶位</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="196"/>
+        <location filename="mainwindow.ui" line="209"/>
         <source>Stop Bits</source>
         <translation>停止位</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="216"/>
+        <location filename="mainwindow.ui" line="229"/>
         <source>Flow Control</source>
         <translation>流量控制</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="236"/>
+        <location filename="mainwindow.ui" line="249"/>
         <source>Open Serial Port</source>
         <translation>打开串口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="250"/>
+        <location filename="mainwindow.ui" line="263"/>
         <source>TCP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="256"/>
+        <location filename="mainwindow.ui" line="269"/>
         <source>Host IP</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器IP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="273"/>
+        <location filename="mainwindow.ui" line="286"/>
         <source>Host Port</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器端口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="290"/>
+        <location filename="mainwindow.ui" line="303"/>
         <source>Open TCP Client</source>
-        <translation type="unfinished"></translation>
+        <translation>打开TCP客户端</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="300"/>
+        <location filename="mainwindow.ui" line="313"/>
         <source>Listen IP</source>
-        <translation type="unfinished"></translation>
+        <translation>监听IP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="317"/>
+        <location filename="mainwindow.ui" line="330"/>
         <source>Listen Port</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="334"/>
-        <source>Open TCP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>监听端口</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="347"/>
-        <source>Connetions</source>
-        <translation type="unfinished"></translation>
+        <source>Open TCP Server</source>
+        <translation>打开TCP服务器</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="355"/>
+        <location filename="mainwindow.ui" line="357"/>
+        <source>Current Connections</source>
+        <translation>当前连接</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="377"/>
+        <source>Disconnect</source>
+        <translation>断开所选连接</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="391"/>
+        <source>Dest IP</source>
+        <translation>目的IP</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="408"/>
+        <source>Dest Port</source>
+        <translation>目的端口</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="425"/>
+        <source>Local IP</source>
+        <translation>本地IP</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="442"/>
+        <source>Local Port</source>
+        <translation>本地端口</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="459"/>
+        <source>Open UDP</source>
+        <translation>打开UDP</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="482"/>
+        <source>Send to Connected Connection</source>
+        <translation>发送至已连入的UDP连接</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="495"/>
+        <source>Connected Connection</source>
+        <translation>已连入的UDP连接</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="385"/>
         <source>UDP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="361"/>
         <source>Destination IP</source>
-        <translation>目的IP地址</translation>
+        <translation type="vanished">目的IP地址</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="378"/>
         <source>Destination Port</source>
-        <translation>目的端口号</translation>
+        <translation type="vanished">目的端口号</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="395"/>
         <source>Receive IP</source>
-        <translation>接收IP地址</translation>
+        <translation type="vanished">接收IP地址</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="412"/>
         <source>Receive Port</source>
-        <translation>接收端口号</translation>
+        <translation type="vanished">接收端口号</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="429"/>
         <source>Open Receive</source>
-        <translation>打开接收UDP</translation>
+        <translation type="vanished">打开接收UDP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="443"/>
+        <location filename="mainwindow.ui" line="503"/>
         <source>Setup</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="449"/>
-        <location filename="mainwindow.ui" line="465"/>
+        <location filename="mainwindow.ui" line="509"/>
+        <location filename="mainwindow.ui" line="525"/>
         <source>Send Color</source>
         <translation>发送颜色</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="472"/>
-        <location filename="mainwindow.ui" line="488"/>
+        <location filename="mainwindow.ui" line="532"/>
+        <location filename="mainwindow.ui" line="548"/>
         <source>Receive Color</source>
         <translation>接收颜色</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="495"/>
+        <location filename="mainwindow.ui" line="555"/>
         <source>Font Size (pt)</source>
         <translation>显示字体大小 (pt)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="508"/>
+        <location filename="mainwindow.ui" line="568"/>
         <source>Recent Records</source>
         <translation>历史记录数目</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="20"/>
+        <location filename="mainwindow.cpp" line="17"/>
         <source>Ready</source>
         <translation>准备就绪</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="83"/>
+        <location filename="mainwindow.cpp" line="97"/>
         <source>Recv all：%1 Bytes</source>
         <translation>总接收: %1 字节</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="84"/>
+        <location filename="mainwindow.cpp" line="98"/>
         <source>Send all：%1 Bytes</source>
         <translation>总发送: %1 字节</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="95"/>
+        <location filename="mainwindow.cpp" line="109"/>
         <source>[Send to &lt;SerialPort&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;串口&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="97"/>
+        <location filename="mainwindow.cpp" line="111"/>
         <source>[Recv from &lt;SerialPort&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;串口&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="104"/>
+        <location filename="mainwindow.cpp" line="116"/>
+        <source>[Send to &lt;TCP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
+        <translation>[发送至&lt;TCP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="118"/>
+        <source>[Recv from &lt;TCP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
+        <translation>[接收自&lt;TCP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="123"/>
         <source>[Send to &lt;UDP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;UDP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="127"/>
         <source>[Recv from &lt;UDP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;UDP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="113"/>
+        <location filename="mainwindow.cpp" line="132"/>
         <source>
 ====== Hex: %1</source>
         <translation>
 ====== 十六进制: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="116"/>
+        <location filename="mainwindow.cpp" line="135"/>
         <source>
 ++++++ Filter: %1</source>
         <translation>
@@ -253,23 +298,22 @@
         <translation>[Error]串口无法打开</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="117"/>
-        <location filename="serialport.cpp" line="121"/>
-        <location filename="serialport.cpp" line="123"/>
-        <source>SerialPort Error</source>
-        <translation>串口出错</translation>
+        <location filename="serialport.cpp" line="119"/>
+        <source>[Error]code: %1, Description: %2</source>
+        <translation>[Error]错误码: %1, 描述: %2</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="117"/>
-        <location filename="serialport.cpp" line="121"/>
-        <location filename="serialport.cpp" line="123"/>
+        <source>SerialPort Error</source>
+        <translation type="vanished">串口出错</translation>
+    </message>
+    <message>
         <source>Error code: %1
 Description: %2</source>
-        <translation>错误码: %1
+        <translation type="vanished">错误码: %1
 错误描述: %2</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="140"/>
+        <location filename="serialport.cpp" line="135"/>
         <source>Serial Port: %1, Recv: %2 Bytes</source>
         <translation>串口: %1, 接收: %2 字节</translation>
     </message>
@@ -277,104 +321,164 @@ Description: %2</source>
 <context>
     <name>TCPApp</name>
     <message>
-        <location filename="tcpapp.cpp" line="62"/>
+        <location filename="tcpapp.cpp" line="89"/>
         <source>Client error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>客户端错误: %1</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="65"/>
+        <location filename="tcpapp.cpp" line="87"/>
         <source>Server error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>服务端错误: %1</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="67"/>
-        <source>[Error]code: %1, description: %2</source>
-        <translation type="unfinished">[Error]错误码: %1, 错误描述: %2</translation>
+        <location filename="tcpapp.cpp" line="69"/>
+        <source>Open TCP Server on &quot;%1:%2&quot;</source>
+        <translation>打开TCP服务&quot;%1:%2&quot;</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="74"/>
-        <source>TCP is disconnected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="tcpapp.cpp" line="77"/>
-        <source>TCP is performing a host name lookup</source>
-        <translation type="unfinished"></translation>
+        <location filename="tcpapp.cpp" line="71"/>
+        <source>[Error]Can not open TCP Server: %1</source>
+        <translation>[Error]无法打开TCP服务端: %1</translation>
     </message>
     <message>
         <location filename="tcpapp.cpp" line="80"/>
+        <source>Closed TCP Server</source>
+        <translation>已关闭TCP服务端</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="91"/>
+        <source>[Error]code: %1, description: %2</source>
+        <translation>[Error]错误码: %1, 错误描述: %2</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="109"/>
+        <source>TCP Client is disconnected</source>
+        <translation>TCP客户端已断开连接</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="122"/>
+        <source>TCP connection &quot;%1:%2&quot; is established</source>
+        <translation>已建立TCP连接&quot;%1:%2&quot;</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="160"/>
+        <source>TCP Client Send Data Successfully: %1 Bytes</source>
+        <translation>TCP客户端发送数据成功: %1 字节</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="162"/>
+        <source>[Error]TCP Client Failed to Send Data: %1</source>
+        <translation>[Error]TCP客户端发送数据失败: %1</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="185"/>
+        <source>[Error]No selected TCP Client connection</source>
+        <translation>[Error]未选择TCP客户端连接</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="188"/>
+        <source>[Error]TCP Client or Server not open</source>
+        <translation>[Error]未打开TCP客户端或服务端</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="225"/>
+        <source>All selected TCP Client has disconnected</source>
+        <translation>所有已选择的TCP客户端均已断开连接</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="116"/>
+        <source>TCP is performing a host name lookup</source>
+        <translation>TCP正在执行主机名查找</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="119"/>
         <source>TCP has started establishing a connection</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP已开始建立连接</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="83"/>
-        <source>TCP connection: %1:%2 is established</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="tcpapp.cpp" line="86"/>
+        <location filename="tcpapp.cpp" line="126"/>
         <source>TCP is bound to an address and port</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP已绑定到指定地址和端口</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="89"/>
+        <location filename="tcpapp.cpp" line="129"/>
         <source>TCP is about to close</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP即将关闭</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="92"/>
+        <location filename="tcpapp.cpp" line="132"/>
         <source>TCP is listening</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP正在监听中</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="95"/>
+        <location filename="tcpapp.cpp" line="135"/>
         <source>Unknow state</source>
-        <translation type="unfinished"></translation>
+        <translation>未知状态</translation>
     </message>
 </context>
 <context>
     <name>UDPApp</name>
     <message>
-        <location filename="udpapp.cpp" line="39"/>
         <source>Started UDP Receiver - %1:%2</source>
-        <translation>已打开UDP接收端口 - %1:%2</translation>
+        <translation type="vanished">已打开UDP接收端口 - %1:%2</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="41"/>
         <source>[Error]Can not start UDP Receiver: %1</source>
-        <translation>[Error]无法打开UDP接收端口: %1</translation>
+        <translation type="vanished">[Error]无法打开UDP接收端口: %1</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="47"/>
         <source>Closed UDP Receiver</source>
-        <translation>已关闭UDP接收端口</translation>
+        <translation type="vanished">已关闭UDP接收端口</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="94"/>
         <source>Receive error: %1</source>
         <oldsource>Receive error: %1, </oldsource>
-        <translation type="unfinished">接收出错: %1, </translation>
+        <translation type="obsolete">接收出错: %1, </translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="97"/>
         <source>Send error: %1</source>
         <oldsource>Send error: %2, </oldsource>
-        <translation type="unfinished">发送出错: %2, </translation>
+        <translation type="obsolete">发送出错: %2, </translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="99"/>
+        <location filename="udpapp.cpp" line="34"/>
+        <source>Open UDP on &quot;%1:%2&quot;</source>
+        <translation>打开UDP&quot;%1:%2&quot;</translation>
+    </message>
+    <message>
+        <location filename="udpapp.cpp" line="36"/>
+        <source>[Error]Can not open UDP: %1</source>
+        <translation>[Error]无法打开UDP: %1</translation>
+    </message>
+    <message>
+        <location filename="udpapp.cpp" line="46"/>
+        <source>Closed UDP</source>
+        <translation>关闭UDP</translation>
+    </message>
+    <message>
+        <location filename="udpapp.cpp" line="86"/>
         <source>[Error]code: %1, description: %2</source>
         <translation>[Error]错误码: %1, 错误描述: %2</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="106"/>
+        <location filename="udpapp.cpp" line="96"/>
+        <source>[Error]No selected connection</source>
+        <translation>[Error]未选择连接</translation>
+    </message>
+    <message>
+        <location filename="udpapp.cpp" line="105"/>
         <source>UDP Send Data Successfully: %1 Bytes</source>
         <translation>UDP发送数据成功: %1 字节</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="108"/>
+        <location filename="udpapp.cpp" line="107"/>
         <source>[Error]UDP Failed to Send Data: %1</source>
         <translation>[Error]UDP发送数据失败: %1</translation>
+    </message>
+    <message>
+        <location filename="udpapp.cpp" line="110"/>
+        <source>[Error]UDP not open</source>
+        <translation>[Error]UDP未打开</translation>
     </message>
 </context>
 </TS>

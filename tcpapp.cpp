@@ -169,7 +169,7 @@ QString TCPApp::sendData(const QByteArray &data) {
             if (ret > -1) {
                 size += ret;
             } else {
-                qstrFailed += tr("\"%1:%2\": %3, ")
+                qstrFailed += QString("\"%1:%2\": %3, ")
                         .arg(m_qvClient.at(index)->peerAddress().toString())
                         .arg(m_qvClient.at(index)->peerPort())
                         .arg(m_pClient->errorString());
