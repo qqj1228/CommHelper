@@ -177,9 +177,9 @@ QString TCPApp::sendData(const QByteArray &data) {
         }
         if (items.size() > 0) {
             if (qstrFailed.isEmpty()) {
-                message = QString("TCP Server Send Data Successfully: %1 Bytes").arg(size);
+                message = tr("TCP Server Send Data Successfully: %1 Bytes").arg(size);
             } else {
-                message = "[Error]Failed to Send Data: " + qstrFailed;
+                message = tr("[Error]Failed to Send Data: ") + qstrFailed;
             }
         } else {
             message = tr("[Error]No selected TCP Client connection");

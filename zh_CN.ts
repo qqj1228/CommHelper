@@ -333,7 +333,7 @@ Description: %2</source>
     <message>
         <location filename="tcpapp.cpp" line="69"/>
         <source>Open TCP Server on &quot;%1:%2&quot;</source>
-        <translation>打开TCP服务&quot;%1:%2&quot;</translation>
+        <translation>打开TCP服务端&quot;%1:%2&quot;</translation>
     </message>
     <message>
         <location filename="tcpapp.cpp" line="71"/>
@@ -369,6 +369,16 @@ Description: %2</source>
         <location filename="tcpapp.cpp" line="162"/>
         <source>[Error]TCP Client Failed to Send Data: %1</source>
         <translation>[Error]TCP客户端发送数据失败: %1</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="180"/>
+        <source>TCP Server Send Data Successfully: %1 Bytes</source>
+        <translation>TCP服务端成功发送数据: %1 字节</translation>
+    </message>
+    <message>
+        <location filename="tcpapp.cpp" line="182"/>
+        <source>[Error]Failed to Send Data: </source>
+        <translation>[Error]发送数据失败: </translation>
     </message>
     <message>
         <location filename="tcpapp.cpp" line="185"/>
