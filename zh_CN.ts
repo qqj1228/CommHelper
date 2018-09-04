@@ -295,7 +295,7 @@
     <message>
         <location filename="serialport.cpp" line="105"/>
         <source>[Error]Serial Port not open</source>
-        <translation>[Error]串口无法打开</translation>
+        <translation>[Error]串口没有打开</translation>
     </message>
     <message>
         <location filename="serialport.cpp" line="119"/>
