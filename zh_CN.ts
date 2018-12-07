@@ -4,194 +4,187 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="47"/>
+        <location filename="mainwindow.ui" line="53"/>
         <source>Filter</source>
         <translation>过滤显示</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="57"/>
+        <location filename="mainwindow.ui" line="63"/>
         <source>Clear Log</source>
         <translation>清除日志</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="81"/>
+        <location filename="mainwindow.ui" line="90"/>
         <source>Send</source>
         <translation>发送</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="88"/>
+        <location filename="mainwindow.ui" line="97"/>
         <source>Clear Send</source>
         <translation>清除发送</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="126"/>
+        <location filename="mainwindow.ui" line="135"/>
         <source>Serial Port</source>
         <translation>串口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="132"/>
+        <location filename="mainwindow.ui" line="141"/>
         <source>Port Name</source>
         <translation>串口名</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="152"/>
+        <location filename="mainwindow.ui" line="161"/>
         <source>Baud Rate</source>
         <translation>波特率</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="169"/>
+        <location filename="mainwindow.ui" line="178"/>
         <source>Data Bits</source>
         <translation>数据位</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="189"/>
+        <location filename="mainwindow.ui" line="198"/>
         <source>Parity</source>
         <translation>奇偶位</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="209"/>
+        <location filename="mainwindow.ui" line="218"/>
         <source>Stop Bits</source>
         <translation>停止位</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="229"/>
+        <location filename="mainwindow.ui" line="238"/>
         <source>Flow Control</source>
         <translation>流量控制</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="249"/>
+        <location filename="mainwindow.ui" line="258"/>
         <source>Open Serial Port</source>
         <translation>打开串口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="263"/>
+        <location filename="mainwindow.ui" line="272"/>
         <source>TCP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="269"/>
+        <location filename="mainwindow.ui" line="278"/>
         <source>Host IP</source>
         <translation>服务器IP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="286"/>
+        <location filename="mainwindow.ui" line="295"/>
         <source>Host Port</source>
         <translation>服务器端口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="303"/>
+        <location filename="mainwindow.ui" line="312"/>
         <source>Open TCP Client</source>
         <translation>打开TCP客户端</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="313"/>
+        <location filename="mainwindow.ui" line="322"/>
         <source>Listen IP</source>
         <translation>监听IP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="330"/>
+        <location filename="mainwindow.ui" line="339"/>
         <source>Listen Port</source>
         <translation>监听端口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="347"/>
+        <location filename="mainwindow.ui" line="356"/>
         <source>Open TCP Server</source>
         <translation>打开TCP服务器</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="357"/>
+        <location filename="mainwindow.ui" line="366"/>
         <source>Current Connections</source>
         <translation>当前连接</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="377"/>
+        <location filename="mainwindow.ui" line="386"/>
         <source>Disconnect</source>
         <translation>断开所选连接</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="391"/>
+        <location filename="mainwindow.ui" line="400"/>
         <source>Dest IP</source>
         <translation>目的IP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="408"/>
+        <location filename="mainwindow.ui" line="417"/>
         <source>Dest Port</source>
         <translation>目的端口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="425"/>
+        <location filename="mainwindow.ui" line="434"/>
         <source>Local IP</source>
         <translation>本地IP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="442"/>
+        <location filename="mainwindow.ui" line="451"/>
         <source>Local Port</source>
         <translation>本地端口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="459"/>
+        <location filename="mainwindow.ui" line="468"/>
         <source>Open UDP</source>
         <translation>打开UDP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="482"/>
+        <location filename="mainwindow.ui" line="491"/>
         <source>Send to Connected Connection</source>
         <translation>发送至已连入的UDP连接</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="495"/>
+        <location filename="mainwindow.ui" line="504"/>
         <source>Connected Connection</source>
         <translation>已连入的UDP连接</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="385"/>
+        <location filename="mainwindow.ui" line="534"/>
+        <source>Send Color...</source>
+        <translation>发送颜色...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="557"/>
+        <source>Receive Color...</source>
+        <translation>接收颜色...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="590"/>
+        <source>Send Text Code</source>
+        <translation>发送的文本编码</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="394"/>
         <source>UDP</source>
         <translation></translation>
     </message>
     <message>
-        <source>Destination IP</source>
-        <translation type="vanished">目的IP地址</translation>
-    </message>
-    <message>
-        <source>Destination Port</source>
-        <translation type="vanished">目的端口号</translation>
-    </message>
-    <message>
-        <source>Receive IP</source>
-        <translation type="vanished">接收IP地址</translation>
-    </message>
-    <message>
-        <source>Receive Port</source>
-        <translation type="vanished">接收端口号</translation>
-    </message>
-    <message>
-        <source>Open Receive</source>
-        <translation type="vanished">打开接收UDP</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="503"/>
+        <location filename="mainwindow.ui" line="512"/>
         <source>Setup</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="509"/>
-        <location filename="mainwindow.ui" line="525"/>
+        <location filename="mainwindow.ui" line="518"/>
         <source>Send Color</source>
         <translation>发送颜色</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="532"/>
-        <location filename="mainwindow.ui" line="548"/>
+        <location filename="mainwindow.ui" line="541"/>
         <source>Receive Color</source>
         <translation>接收颜色</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="555"/>
+        <location filename="mainwindow.ui" line="564"/>
         <source>Font Size (pt)</source>
         <translation>显示字体大小 (pt)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="568"/>
+        <location filename="mainwindow.ui" line="577"/>
         <source>Recent Records</source>
         <translation>历史记录数目</translation>
     </message>

@@ -59,7 +59,7 @@ QStringList doSplit(QString &str) {
     return list;
 }
 
-QByteArray convert2Raw(const QString &text, const QChar &start = '[', const QChar &end = ']') {
+QByteArray convert2Raw(const QString &text, const QString &textCode = "UTF-8", const QChar &start = '[', const QChar &end = ']') {
     QByteArray ret;
     QString strHex;
     QStringList strList;
@@ -74,34 +74,55 @@ QByteArray convert2Raw(const QString &text, const QChar &start = '[', const QCha
     while (pos1 > -1) {
         pos1 = data.indexOf(start, pos1);
         if (pos1 > -1) {
-            ret += data.mid(pos2 + 1, pos1 - pos2 - 1).toLocal8Bit();
+            if (textCode == "ANSI") {
+                ret += data.mid(pos2 + 1, pos1 - pos2 - 1).toLocal8Bit();
+            } else {
+                ret += data.mid(pos2 + 1, pos1 - pos2 - 1).toUtf8();
+            }
             pos2 = data.indexOf(end, pos1 + 1);
             if (pos2 > -1) {
                 strHex = data.mid(pos1 + 1, pos2 - pos1 - 1);
                 strList = doSplit(strHex);
                 for (int i = 0; i < strList.size(); ++i) {
-                    ret += str2Byte(strList.at(i).toLocal8Bit().constData());
+                    if (textCode == "ANSI") {
+                        ret += str2Byte(strList.at(i).toLocal8Bit().constData());
+                    } else {
+                        ret += str2Byte(strList.at(i).toUtf8().constData());
+                    }
                 }
                 pos1 = pos2 + 1;
             } else {
-                ret += data.mid(pos1 + 1);
+                if (textCode == "ANSI") {
+                    ret += data.mid(pos1 + 1).toLocal8Bit();
+                } else {
+                    ret += data.mid(pos1 + 1).toUtf8();
+                }
                 break;
             }
         } else {
-            ret += data.mid(pos2 + 1);
+            if (textCode == "ANSI") {
+                ret += data.mid(pos2 + 1).toLocal8Bit();
+            } else {
+                ret += data.mid(pos2 + 1).toUtf8();
+            }
         }
     }
     return ret;
 }
 
-QString getDisplayString(QByteArray data) {
-    for (int i = 0; i < data.size(); ++i) {
-        if (data.at(i) < 0x20 || data.at(i) > 0x7E) {
-            data[i] = 0x5E;
-            data.insert(i, '\\');
-        }
+QString getDisplayString(QByteArray data, const QString &textCode = "UTF-8") {
+    QString ret;
+    if (textCode == "ANSI") {
+        ret = QString::fromLocal8Bit(data);
+    } else {
+        ret = QString::fromUtf8(data);
     }
-    QString ret = QString::fromLocal8Bit(data);
+//    for (int i = 0; i < ret.size(); ++i) {
+//        if (ret.at(i) < 0x100 && (ret.at(i) < 0x20 || ret.at(i) > 0x7E)) {
+//            ret[i] = 0x5E;
+//            ret.insert(i, '\\');
+//        }
+//    }
     return ret;
 }
 

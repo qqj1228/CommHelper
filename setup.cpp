@@ -24,9 +24,12 @@ void Setup::initUI() {
     this->m_pbtnRecvClr = m_pTab->findChild<QPushButton*>(QStringLiteral("btnRecvColor"));
     this->m_pedtSize = m_pTab->findChild<QLineEdit*>(QStringLiteral("edtFontSize"));
     this->m_pedtHistory = m_pTab->findChild<QLineEdit*>(QStringLiteral("edtHistory"));
+    this->m_pcbxTextCode = m_pTab->findChild<QComboBox*>(QStringLiteral("cbxTextCode"));
 
     this->m_pedtSize->setValidator(new QIntValidator(0, 20, this));
     this->m_pedtHistory->setValidator(new QIntValidator(0, 100, this));
+    this->m_pcbxTextCode->addItem(QStringLiteral("ANSI"));
+    this->m_pcbxTextCode->addItem(QStringLiteral("UTF-8"));
 }
 
 void Setup::updateUI() {

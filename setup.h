@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QComboBox>
 
 class Setup : public QObject
 {
@@ -28,6 +29,7 @@ public:
     QColor m_qclrRecv;
     QString m_fontSize;
     int m_iHistory;
+    QComboBox *m_pcbxTextCode = nullptr;
 
 protected:
     QWidget *m_pTab = nullptr;

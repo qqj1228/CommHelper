@@ -100,7 +100,7 @@ void MainWindow::showBytes() {
 
 QString MainWindow::getDisplayMessage(const QByteArray &data, const QString &address, bool send, int enumTunnel) {
     QString message(QTime::currentTime().toString("HH:mm:ss "));
-    QString qstrMessage = CommHelper::getDisplayString(data);
+    QString qstrMessage = CommHelper::getDisplayString(data, m_pMySetup->m_pcbxTextCode->currentText());
     QString qstrHexMessage = CommHelper::getHexString(data);
 
     switch (enumTunnel) {
@@ -176,7 +176,7 @@ void MainWindow::on_btnSend_clicked()
 {
     QString message;
     try {
-        m_send = CommHelper::convert2Raw(m_pUi->cboxSend->currentText());
+        m_send = CommHelper::convert2Raw(m_pUi->cboxSend->currentText(), m_pMySetup->m_pcbxTextCode->currentText());
         switch (m_pUi->tabWidget->currentIndex()) {
         case MainWindow::SerialTab:
             message = m_pMySerial->sendData(m_send);

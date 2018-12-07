@@ -43,6 +43,7 @@
 #define CFG_KEY_RECVCLR "RecvColor"
 #define CFG_KEY_FONTSIZE "FontSize"
 #define CFG_KEY_HISTORY "MaxHistory"
+#define CFG_KEY_TEXTCODE "TextCode"
 
 class Config : public QObject
 {
