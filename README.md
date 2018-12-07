@@ -19,3 +19,4 @@ An assistant to debug Serial Port, TCP, UDP
 - 可以设置发送/接收消息的颜色
 - 可以设置历史记录数量
 - 可以设置消息显示字体大小
+- 可以设置发送消息时采用的文本编码格式，默认为UTF-8，也可设为ANSI（中文系统下即为GBK）

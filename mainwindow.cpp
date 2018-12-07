@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pUi->statusBar->addWidget(m_pLStatus, 5);
     m_pUi->statusBar->addWidget(m_pLRecv, 1);
     m_pUi->statusBar->addWidget(m_pLSend, 1);
+    this->setWindowTitle(WIN_TITLE);
     this->showStatus(tr("Ready"));
     this->showBytes();
     m_pMySerial = new SerialPort(m_pUi->tabSerial, this);

@@ -9,6 +9,7 @@
 #include "setup.h"
 #include "config.h"
 
+#define WIN_TITLE "CommHelper v1.1"
 #define MAX_STATUS_SIZE 100
 
 class QLabel;
