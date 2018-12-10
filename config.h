@@ -9,7 +9,7 @@
 #include "tcpapp.h"
 #include "udpapp.h"
 
-#define CFG_APP_NAME "CommHelper"
+#define CFG_APP_NAME "CommAssistant"
 #define CFG_SEC_SENDED "Sended"
 #define CFG_KEY_ITEM "item"
 #define CFG_SEC_FILTER "Filter"
