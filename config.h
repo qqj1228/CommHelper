@@ -44,6 +44,7 @@
 #define CFG_KEY_FONTSIZE "FontSize"
 #define CFG_KEY_HISTORY "MaxHistory"
 #define CFG_KEY_TEXTCODE "TextCode"
+#define CFG_KEY_RECVDELAY "RecvDelay"
 
 class Config : public QObject
 {

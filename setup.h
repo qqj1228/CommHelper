@@ -30,6 +30,7 @@ public:
     QString m_fontSize;
     int m_iHistory;
     QComboBox *m_pcbxTextCode = nullptr;
+    int m_iRecvDelay;
 
 protected:
     QWidget *m_pTab = nullptr;
@@ -39,6 +40,7 @@ protected:
     QPushButton *m_pbtnRecvClr = nullptr;
     QLineEdit *m_pedtSize = nullptr;
     QLineEdit *m_pedtHistory = nullptr;
+    QLineEdit *m_pedtRecvDelay = nullptr;
 };
 
 #endif // SETUP_H

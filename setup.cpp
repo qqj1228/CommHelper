@@ -9,11 +9,14 @@ Setup::Setup(QWidget *tab, QObject *parent) : QObject(parent),
 
     connect(m_pbtnSendClr, SIGNAL(clicked(bool)), this, SLOT(onSendClr()));
     connect(m_pbtnRecvClr, SIGNAL(clicked(bool)), this, SLOT(onRecvClr()));
-    connect(m_pedtSize, &QLineEdit::editingFinished, [=](){
+    connect(m_pedtSize, &QLineEdit::editingFinished, [&](){
         this->m_fontSize = m_pedtSize->text();
     });
-    connect(m_pedtHistory, &QLineEdit::editingFinished, [=](){
+    connect(m_pedtHistory, &QLineEdit::editingFinished, [&](){
         this->m_iHistory = m_pedtHistory->text().toInt();
+    });
+    connect(m_pedtRecvDelay, &QLineEdit::editingFinished, [&](){
+        this->m_iRecvDelay = m_pedtRecvDelay->text().toInt();
     });
 }
 
@@ -25,9 +28,11 @@ void Setup::initUI() {
     this->m_pedtSize = m_pTab->findChild<QLineEdit*>(QStringLiteral("edtFontSize"));
     this->m_pedtHistory = m_pTab->findChild<QLineEdit*>(QStringLiteral("edtHistory"));
     this->m_pcbxTextCode = m_pTab->findChild<QComboBox*>(QStringLiteral("cbxTextCode"));
+    this->m_pedtRecvDelay = m_pTab->findChild<QLineEdit*>(QStringLiteral("edtRecvDelay"));
 
     this->m_pedtSize->setValidator(new QIntValidator(0, 20, this));
     this->m_pedtHistory->setValidator(new QIntValidator(0, 100, this));
+    this->m_pedtRecvDelay->setValidator(new QIntValidator(0, 1000, this));
     this->m_pcbxTextCode->addItem(QStringLiteral("ANSI"));
     this->m_pcbxTextCode->addItem(QStringLiteral("UTF-8"));
 }
@@ -37,6 +42,7 @@ void Setup::updateUI() {
     m_plabRecv->setStyleSheet(QString("color:%1").arg(m_qclrRecv.name()));
     m_pedtSize->setText(m_fontSize);
     m_pedtHistory->setText(QString("%1").arg(m_iHistory));
+    m_pedtRecvDelay->setText(QString("%1").arg(m_iRecvDelay));
 }
 
 void Setup::showColor(bool bSend) {

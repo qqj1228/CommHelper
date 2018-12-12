@@ -17,10 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle(WIN_TITLE);
     this->showStatus(tr("Ready"));
     this->showBytes();
-    m_pMySerial = new SerialPort(m_pUi->tabSerial, this);
     m_pMyTCP = new TCPApp(m_pUi->tabTCP, this);
     m_pMyUDP = new UDPApp(m_pUi->tabUDP, this);
     m_pMySetup = new Setup(m_pUi->tabSetup, this);
+    m_pMySerial = new SerialPort(m_pUi->tabSerial, m_pMySetup, this);
     m_pMyConfig = new Config(this);
     m_pMyConfig->loadHistory(m_pUi->cboxSend, CFG_SEC_SENDED);
     m_pMyConfig->loadHistory(m_pUi->cboxFilter, CFG_SEC_FILTER);

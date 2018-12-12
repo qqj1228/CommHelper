@@ -99,6 +99,7 @@ void Config::saveSetup(const Setup *pMySetup) {
     m_pConfig->setValue(CFG_KEY_FONTSIZE, pMySetup->m_fontSize);
     m_pConfig->setValue(CFG_KEY_HISTORY, pMySetup->m_iHistory);
     m_pConfig->setValue(CFG_KEY_TEXTCODE, pMySetup->m_pcbxTextCode->currentIndex());
+    m_pConfig->setValue(CFG_KEY_RECVDELAY, pMySetup->m_iRecvDelay);
     m_pConfig->endGroup();
 }
 
@@ -109,6 +110,7 @@ void Config::loadSetup(Setup *pMySetup) {
     pMySetup->m_fontSize = m_pConfig->value(CFG_KEY_FONTSIZE, "9").toString();
     pMySetup->m_iHistory = m_pConfig->value(CFG_KEY_HISTORY, "10").toInt();
     pMySetup->m_pcbxTextCode->setCurrentIndex(m_pConfig->value(CFG_KEY_TEXTCODE, 1).toInt());
+    pMySetup->m_iRecvDelay = m_pConfig->value(CFG_KEY_RECVDELAY, "200").toInt();
     m_pConfig->endGroup();
 }
 

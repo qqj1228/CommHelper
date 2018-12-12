@@ -1,4 +1,4 @@
-# CommHelper
+# CommAssistant
 An assistant to debug Serial Port, TCP, UDP
 
 串口/TCP/UDP调试助手
@@ -20,3 +20,4 @@ An assistant to debug Serial Port, TCP, UDP
 - 可以设置历史记录数量
 - 可以设置消息显示字体大小
 - 可以设置发送消息时采用的文本编码格式，默认为UTF-8，也可设为ANSI（中文系统下即为GBK）
+- 可以设置串口接收时延时时间，串口接收会有断包问题（接收到的数据不是一个完整数据包而是被分成好几小数据包），故设置一个合理的接收延时可以有效解决这个问题

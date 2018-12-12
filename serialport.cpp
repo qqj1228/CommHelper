@@ -2,11 +2,14 @@
 #include "mainwindow.h"
 #include <QSerialPortInfo>
 #include <QMessageBox>
+#include <QTimer>
 
-SerialPort::SerialPort(QWidget *tab, QObject *parent) :
+SerialPort::SerialPort(QWidget *tab, Setup *setup, QObject *parent) :
     QObject(parent),
+    m_pSetup(setup),
     m_pTab(tab),
-    m_pSerial(new QSerialPort(this))
+    m_pSerial(new QSerialPort(this)),
+    m_pTimer(new QTimer(this))
 {
     m_pParent = qobject_cast<QWidget *>(parent);
     initComboBox();
@@ -15,6 +18,7 @@ SerialPort::SerialPort(QWidget *tab, QObject *parent) :
     connect(m_pSerial, SIGNAL(bytesWritten(qint64)), this, SLOT(onBytesSended(qint64)));
     connect(m_pSerial, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
     connect(m_pSerial, &QSerialPort::readyRead, this, &SerialPort::recvData);
+    connect(m_pTimer, &QTimer::timeout, this, &SerialPort::timerUpdate);
 }
 
 SerialPort::~SerialPort() {
@@ -129,12 +133,23 @@ void SerialPort::updatePort() {
     m_pCboxPort->setCurrentIndex(m_pCboxPort->findData(m_pSerial->portName()));
 }
 
-QString SerialPort::recvData() {
-    const QByteArray data = m_pSerial->readAll();
-    emit hasRecved(data, m_pSerial->portName(), MainWindow::SerialTab);
-    return tr("Serial Port: %1, Recv: %2 Bytes").arg(m_pSerial->portName()).arg(data.size());
+void SerialPort::recvData() {
+    // 处理串口断包问题
+    if (!m_pTimer->isActive()) {
+        m_pTimer->setTimerType(Qt::PreciseTimer);
+        m_pTimer->start(m_pSetup->m_iRecvDelay);
+    }
+    m_data.append(m_pSerial->readAll());
 }
 
 void SerialPort::onBytesSended(qint64 bytes) {
     emit bytesSended(bytes, m_pSerial->portName());
+}
+
+QString SerialPort::timerUpdate() {
+    int size = m_data.size();
+    emit hasRecved(m_data, m_pSerial->portName(), MainWindow::SerialTab);
+    m_data.clear();
+    m_pTimer->stop();
+    return tr("Serial Port: %1, Recv: %2 Bytes").arg(m_pSerial->portName()).arg(size);
 }

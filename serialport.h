@@ -4,17 +4,19 @@
 #include <QObject>
 #include <QSerialPort>
 #include <QComboBox>
+#include "setup.h"
 
 class SerialPort : public QObject
 {
     Q_OBJECT
 public:
-    explicit SerialPort(QWidget *tab, QObject *parent = nullptr);
+    explicit SerialPort(QWidget *tab, Setup *setup, QObject *parent = nullptr);
     ~SerialPort();
     QString openSerialPort();
     QString closeSerialPort();
     QString sendData(const QByteArray &data);
-    QString recvData();
+    void recvData();
+    QString timerUpdate();
     void updatePort();
 
 signals:
@@ -33,8 +35,12 @@ private:
 
 protected:
     QWidget *m_pParent = nullptr;
+    Setup *m_pSetup = nullptr;
     QWidget *m_pTab = nullptr;
     QSerialPort *m_pSerial = nullptr;
+    QTimer *m_pTimer = nullptr;
+    QByteArray m_data;
+
 public:
     QComboBox *m_pCboxPort = nullptr;
     QComboBox *m_pCboxBaud = nullptr;
