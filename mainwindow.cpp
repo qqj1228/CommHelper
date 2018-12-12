@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "utility.h"
 #include <QTime>
+#include <QTimer>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -158,6 +160,27 @@ void MainWindow::addComboBoxItem(QComboBox *cmb) {
     }
 }
 
+void MainWindow::sendMessage(const QString &text) {
+    QString message;
+    try {
+        m_send = CommHelper::convert2Raw(text, m_pMySetup->m_pcbxTextCode->currentText());
+        switch (m_pUi->tabWidget->currentIndex()) {
+        case MainWindow::SerialTab:
+            message = m_pMySerial->sendData(m_send);
+            break;
+        case MainWindow::TCPTab:
+            message = m_pMyTCP->sendData(m_send);
+            break;
+        case MainWindow::UDPTab:
+            message = m_pMyUDP->sendData(m_send);
+            break;
+        }
+    } catch (QString &ex) {
+        message = "[Error]" + ex;
+    }
+    this->showStatus(message);
+}
+
 // Qt自动默认命名槽函数的话无需手动connect，否则会触发两次
 void MainWindow::on_btnOpen_clicked(bool checked)
 {
@@ -175,24 +198,7 @@ void MainWindow::on_btnOpen_clicked(bool checked)
 
 void MainWindow::on_btnSend_clicked()
 {
-    QString message;
-    try {
-        m_send = CommHelper::convert2Raw(m_pUi->cboxSend->currentText(), m_pMySetup->m_pcbxTextCode->currentText());
-        switch (m_pUi->tabWidget->currentIndex()) {
-        case MainWindow::SerialTab:
-            message = m_pMySerial->sendData(m_send);
-            break;
-        case MainWindow::TCPTab:
-            message = m_pMyTCP->sendData(m_send);
-            break;
-        case MainWindow::UDPTab:
-            message = m_pMyUDP->sendData(m_send);
-            break;
-        }
-    } catch (QString &ex) {
-        message = "[Error]" + ex;
-    }
-    this->showStatus(message);
+    this->sendMessage(m_pUi->cboxSend->currentText());
 }
 
 void MainWindow::onSended(qint64 bytes, QString address) {
@@ -216,10 +222,28 @@ void MainWindow::onSended(qint64 bytes, QString address) {
     this->addComboBoxItem(m_pUi->cboxSend);
 }
 
-void MainWindow::on_btnClear_clicked()
+void MainWindow::on_btnSendFile_clicked()
 {
-    m_pUi->cboxSend->clear();
-    m_pMyConfig->remove(QString(CFG_SEC_SENDED));
+    QString fileName = QFileDialog::getOpenFileName(this, "", QDir::currentPath(), "Text files (*.txt);;All files (*.*)");
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            while(!file.atEnd())
+            {
+                QByteArray line = file.readLine();
+                line.resize(line.size() - 1);
+                if (line.size() > 0) {
+                    this->sendMessage(line);
+                    // 延时
+                    QEventLoop eventloop;
+                    QTimer::singleShot(m_pMySetup->m_iFileDelay, &eventloop, SLOT(quit()));
+                    eventloop.exec();
+                }
+            }
+        } else {
+            this->showStatus(tr("[Error]Can't open this file!"));
+        }
+    }
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)

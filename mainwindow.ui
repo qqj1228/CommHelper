@@ -92,9 +92,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnClear">
+       <widget class="QPushButton" name="btnSendFile">
         <property name="text">
-         <string>Clear Send</string>
+         <string>Send File...</string>
         </property>
        </widget>
       </item>
@@ -594,15 +594,40 @@
         <item row="4" column="1">
          <widget class="QComboBox" name="cbxTextCode"/>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_19">
-          <property name="text">
-           <string>COM Delay (ms)</string>
+        <item row="7" column="0" colspan="2">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
+          <property name="title">
+           <string>Serial Port</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_5">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>Receive Delay (ms)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="edtRecvDelay"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string>Send File Delay (ms)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="edtFileDelay"/>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="edtRecvDelay"/>
         </item>
        </layout>
       </widget>
@@ -620,7 +645,7 @@
   <tabstop>btnClearText</tabstop>
   <tabstop>cboxSend</tabstop>
   <tabstop>btnSend</tabstop>
-  <tabstop>btnClear</tabstop>
+  <tabstop>btnSendFile</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>cboxPort</tabstop>
   <tabstop>cboxBaud</tabstop>

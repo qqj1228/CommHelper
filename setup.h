@@ -31,6 +31,7 @@ public:
     int m_iHistory;
     QComboBox *m_pcbxTextCode = nullptr;
     int m_iRecvDelay;
+    int m_iFileDelay;
 
 protected:
     QWidget *m_pTab = nullptr;
@@ -41,6 +42,7 @@ protected:
     QLineEdit *m_pedtSize = nullptr;
     QLineEdit *m_pedtHistory = nullptr;
     QLineEdit *m_pedtRecvDelay = nullptr;
+    QLineEdit *m_pedtFileDelay = nullptr;
 };
 
 #endif // SETUP_H

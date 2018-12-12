@@ -35,12 +35,13 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void sendMessage(const QString &text);
 
 private slots:
     void on_btnOpen_clicked(bool checked);
     void on_btnSend_clicked();
     void onSended(qint64 bytes, QString address);
-    void on_btnClear_clicked();
+    void on_btnSendFile_clicked();
     void on_tabWidget_currentChanged(int index);
     void onRecved(QByteArray data, QString address, int enumTunnel);
     void on_btnClearText_clicked();
@@ -52,6 +53,7 @@ private slots:
     void onTCPDisconnected(QString qstrSender);
     void on_btnTCPServer_clicked(bool checked);
     void on_btnDisconn_clicked();
+
 
 private:
     void showStatus(QString message);

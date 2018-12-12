@@ -45,6 +45,7 @@
 #define CFG_KEY_HISTORY "MaxHistory"
 #define CFG_KEY_TEXTCODE "TextCode"
 #define CFG_KEY_RECVDELAY "RecvDelay"
+#define CFG_KEY_FILEDELAY "FileDelay"
 
 class Config : public QObject
 {
