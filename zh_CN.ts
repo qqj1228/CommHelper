@@ -20,11 +20,13 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="97"/>
-        <source>Clear Send</source>
-        <translation>清除发送</translation>
+        <source>Send File...</source>
+        <oldsource>Clear Send</oldsource>
+        <translation>文件发送...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="135"/>
+        <location filename="mainwindow.ui" line="606"/>
         <source>Serial Port</source>
         <translation>串口</translation>
     </message>
@@ -159,9 +161,14 @@
         <translation>发送的文本编码</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="600"/>
-        <source>COM Delay (ms)</source>
-        <translation>串口接收延时 (ms)</translation>
+        <location filename="mainwindow.ui" line="612"/>
+        <source>Receive Delay (ms)</source>
+        <translation>接收等待时间 (ms)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="622"/>
+        <source>Send File Delay (ms)</source>
+        <translation>文件发送间隔时间 (ms)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="394"/>
@@ -194,108 +201,127 @@
         <translation>历史记录数目</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="18"/>
+        <location filename="mainwindow.cpp" line="20"/>
         <source>Ready</source>
         <translation>准备就绪</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="98"/>
+        <location filename="mainwindow.cpp" line="100"/>
         <source>Recv all：%1 Bytes</source>
         <translation>总接收: %1 字节</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="99"/>
+        <location filename="mainwindow.cpp" line="101"/>
         <source>Send all：%1 Bytes</source>
         <translation>总发送: %1 字节</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="110"/>
+        <location filename="mainwindow.cpp" line="112"/>
         <source>[Send to &lt;SerialPort&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;串口&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="112"/>
+        <location filename="mainwindow.cpp" line="114"/>
         <source>[Recv from &lt;SerialPort&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;串口&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="117"/>
+        <location filename="mainwindow.cpp" line="119"/>
         <source>[Send to &lt;TCP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;TCP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="119"/>
+        <location filename="mainwindow.cpp" line="121"/>
         <source>[Recv from &lt;TCP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;TCP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="124"/>
+        <location filename="mainwindow.cpp" line="126"/>
         <source>[Send to &lt;UDP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[发送至&lt;UDP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="128"/>
+        <location filename="mainwindow.cpp" line="130"/>
         <source>[Recv from &lt;UDP&gt;&quot;%1&quot; - %2 Bytes]: %3</source>
         <translation>[接收自&lt;UDP&gt;&quot;%1&quot; - %2 字节]: %3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="133"/>
+        <location filename="mainwindow.cpp" line="135"/>
         <source>
 ====== Hex: %1</source>
         <translation>
 ====== 十六进制: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="136"/>
+        <location filename="mainwindow.cpp" line="138"/>
         <source>
 ++++++ Filter: %1</source>
         <translation>
 ++++++ 过滤显示: %1</translation>
     </message>
+    <message>
+        <location filename="mainwindow.cpp" line="249"/>
+        <source>Finished sending text file content</source>
+        <translation>发送文件内容已完成</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="251"/>
+        <source>[Error]Can&apos;t open this file!</source>
+        <translation>[Error]无法打开这个文件！</translation>
+    </message>
 </context>
 <context>
     <name>SerialPort</name>
     <message>
-        <location filename="serialport.cpp" line="85"/>
+        <location filename="serialport.cpp" line="88"/>
         <source>Successfully open Serial Port: </source>
         <translation>成功打开串口: </translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="87"/>
+        <location filename="serialport.cpp" line="90"/>
         <source>[Error]Can not open Serial Port: </source>
         <translation>[Error]无法打开串口: </translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="96"/>
+        <location filename="serialport.cpp" line="99"/>
         <source>Closed Serial Port</source>
         <translation>已关闭串口</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="106"/>
+        <location filename="serialport.cpp" line="108"/>
         <source>Serial Port: </source>
         <translation>串口: </translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="106"/>
-        <source>Successfully Send Data</source>
-        <translation>发送数据成功</translation>
+        <location filename="serialport.cpp" line="108"/>
+        <source> Successfully Send Data</source>
+        <translation> 发送数据成功</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="108"/>
+        <location filename="serialport.cpp" line="110"/>
+        <source> Failed to Send Data, </source>
+        <translation> 发送数据失败, </translation>
+    </message>
+    <message>
+        <source>Successfully Send Data</source>
+        <translation type="vanished">发送数据成功</translation>
+    </message>
+    <message>
+        <location filename="serialport.cpp" line="110"/>
         <source>[Error]Serial Port: </source>
         <translation>[Error]串口: </translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="108"/>
         <source>Failed to Send Data, </source>
-        <translation>发送数据失败, </translation>
+        <translation type="vanished">发送数据失败, </translation>
     </message>
     <message>
+        <location filename="serialport.cpp" line="113"/>
         <source>[Error]Serial Port not open</source>
-        <translation type="vanished">[Error]串口没有打开</translation>
+        <translation>[Error]串口没有打开</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="122"/>
+        <location filename="serialport.cpp" line="127"/>
         <source>[Error]code: %1, Description: %2</source>
         <translation>[Error]错误码: %1, 描述: %2</translation>
     </message>
@@ -310,7 +336,7 @@ Description: %2</source>
 错误描述: %2</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="153"/>
+        <location filename="serialport.cpp" line="158"/>
         <source>Serial Port: %1, Recv: %2 Bytes</source>
         <translation>串口: %1, 接收: %2 字节</translation>
     </message>

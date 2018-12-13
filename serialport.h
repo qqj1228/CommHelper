@@ -32,6 +32,7 @@ public slots:
 private:
     void initComboBox();
     void initParameters();
+    void setupSerial();
 
 protected:
     QWidget *m_pParent = nullptr;

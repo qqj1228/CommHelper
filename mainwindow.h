@@ -9,7 +9,7 @@
 #include "setup.h"
 #include "config.h"
 
-#define WIN_TITLE "CommAssistant v1.2"
+#define WIN_TITLE "CommAssistant v1.3"
 #define MAX_STATUS_SIZE 100
 
 class QLabel;

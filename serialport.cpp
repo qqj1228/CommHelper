@@ -72,14 +72,17 @@ void SerialPort::initParameters()
     m_pCboxFlow->addItem(QStringLiteral("XON/XOFF"), QSerialPort::SoftwareControl);
 }
 
-QString SerialPort::openSerialPort() {
+void SerialPort::setupSerial() {
     m_pSerial->setPortName(m_pCboxPort->itemData(m_pCboxPort->currentIndex()).toString());
     m_pSerial->setBaudRate(m_pCboxBaud->currentText().toInt());
     m_pSerial->setDataBits(static_cast<QSerialPort::DataBits>(m_pCboxBit->itemData(m_pCboxBit->currentIndex()).toInt()));
     m_pSerial->setParity(static_cast<QSerialPort::Parity>(m_pCboxParity->itemData(m_pCboxParity->currentIndex()).toInt()));
     m_pSerial->setStopBits(static_cast<QSerialPort::StopBits>(m_pCboxStop->itemData(m_pCboxStop->currentIndex()).toInt()));
     m_pSerial->setFlowControl(static_cast<QSerialPort::FlowControl>(m_pCboxFlow->itemData(m_pCboxFlow->currentIndex()).toInt()));
+}
 
+QString SerialPort::openSerialPort() {
+    this->setupSerial();
     QString message = "";
     if (m_pSerial->open(QIODevice::ReadWrite)) {
         message = tr("Successfully open Serial Port: ") + m_pSerial->portName();
@@ -100,10 +103,11 @@ QString SerialPort::closeSerialPort() {
 QString SerialPort::sendData(const QByteArray &data) {
     QString message;
     if (m_pSerial->isOpen()) {
+        this->setupSerial();
         if (m_pSerial->write(data)) {
-            message = tr("Serial Port: ") + m_pSerial->portName() + tr("Successfully Send Data");
+            message = tr("Serial Port: ") + m_pSerial->portName() + tr(" Successfully Send Data");
         } else {
-            message = tr("[Error]Serial Port: ") + m_pSerial->portName() + tr("Failed to Send Data, ") + m_pSerial->errorString();
+            message = tr("[Error]Serial Port: ") + m_pSerial->portName() + tr(" Failed to Send Data, ") + m_pSerial->errorString();
         }
     } else {
         message = tr("[Error]Serial Port not open");

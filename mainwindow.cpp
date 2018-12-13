@@ -187,12 +187,15 @@ void MainWindow::on_btnOpen_clicked(bool checked)
     QString message;
     if (checked) {
         message = m_pMySerial->openSerialPort();
+        m_pUi->cboxPort->setEnabled(false);
     } else {
         message = m_pMySerial->closeSerialPort();
+        m_pUi->cboxPort->setEnabled(true);
     }
     this->showStatus(message);
     if (message.indexOf("Error") >= 0) {
          m_pUi->btnOpen->setChecked(false);
+         m_pUi->cboxPort->setEnabled(true);
     }
 }
 
@@ -226,6 +229,9 @@ void MainWindow::on_btnSendFile_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "", QDir::currentPath(), "Text files (*.txt);;All files (*.*)");
     if (!fileName.isEmpty()) {
+        m_pUi->cboxSend->setCurrentText(fileName);
+        m_pUi->cboxSend->setEnabled(false);
+        m_pUi->btnSend->setEnabled(false);
         QFile file(fileName);
         if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             while(!file.atEnd())
@@ -240,9 +246,14 @@ void MainWindow::on_btnSendFile_clicked()
                     eventloop.exec();
                 }
             }
+            this->showStatus(tr("Finished sending text file content"));
         } else {
             this->showStatus(tr("[Error]Can't open this file!"));
         }
+        m_pUi->cboxSend->removeItem(m_pUi->cboxSend->findText(fileName));
+        m_pUi->cboxSend->clearEditText();
+        m_pUi->cboxSend->setEnabled(true);
+        m_pUi->btnSend->setEnabled(true);
     }
 }
 

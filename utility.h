@@ -111,18 +111,39 @@ QByteArray convert2Raw(const QString &text, const QString &textCode = "UTF-8", c
 }
 
 QString getDisplayString(QByteArray data, const QString &textCode = "UTF-8") {
+    for (int i = 0; i < data.size(); ++i) {
+        if (data.at(i) == 0x00) {
+            data[i] = '0';
+            data.insert(i, '\\');
+        }
+    }
     QString ret;
     if (textCode == "ANSI") {
         ret = QString::fromLocal8Bit(data);
     } else {
         ret = QString::fromUtf8(data);
     }
-//    for (int i = 0; i < ret.size(); ++i) {
-//        if (ret.at(i) < 0x100 && (ret.at(i) < 0x20 || ret.at(i) > 0x7E)) {
-//            ret[i] = 0x5E;
-//            ret.insert(i, '\\');
-//        }
-//    }
+    for (int i = 0; i < ret.size(); ++i) {
+        if (ret.at(i) < 0x0100 && (ret.at(i) < 0x0020 || ret.at(i) > 0x007E)) {
+            if (ret.at(i) == QChar(0x0007)) {
+                ret.replace(i, 1, "\\a");
+            } else if (ret.at(i) == QChar(0x0008)) {
+                ret.replace(i, 1, "\\b");
+            } else if (ret.at(i) == QChar(0x0009)) {
+                ret.replace(i, 1, "\\t");
+            } else if (ret.at(i) == QChar(0x000a)) {
+                ret.replace(i, 1, "\\n");
+            } else if (ret.at(i) == QChar(0x000b)) {
+                ret.replace(i, 1, "\\v");
+            } else if (ret.at(i) == QChar(0x000c)) {
+                ret.replace(i, 1, "\\f");
+            } else if (ret.at(i) == QChar(0x000d)) {
+                ret.replace(i, 1, "\\r");
+            } else {
+                ret.replace(i, 1, "\\?");
+            }
+        }
+    }
     return ret;
 }
 
