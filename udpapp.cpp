@@ -87,13 +87,15 @@ void UDPApp::onError(QAbstractSocket::SocketError socketError) {
 }
 
 QString UDPApp::sendData(const QByteArray &data) {
-    QString address;
+    QString address, message;
     qint64 ret = 0;
     if (m_pUDP != nullptr) {
+        // 调用m_pUDP->writeDatagram的过程中已经触发了bytesWritten(qint64)信号，故先入队列
+        m_sendData.enqueue(data);
         if (m_pcheckConn->isChecked()) {
             QListWidgetItem *pitem = m_plistUDPConn->currentItem();
             if (pitem == nullptr) {
-                return tr("[Error]No selected connection");
+                message = tr("[Error]No selected connection");
             }
             address = pitem->text();
             int pos = address.indexOf(':');
@@ -102,13 +104,17 @@ QString UDPApp::sendData(const QByteArray &data) {
             ret = m_pUDP->writeDatagram(data, QHostAddress(m_pcbxDestIP->currentText()), m_pcbxDestPort->currentText().toInt());
         }
         if (ret > -1) {
-            return tr("UDP Send Data Successfully: %1 Bytes").arg(ret);
+            message = tr("UDP Send Data Successfully: %1 Bytes").arg(ret);
         } else {
-            return tr("[Error]UDP Failed to Send Data: %1").arg(m_pUDP->errorString());
+            if (!m_sendData.isEmpty()) {
+                m_sendData.pop_back();
+            }
+            message = tr("[Error]UDP Failed to Send Data: %1").arg(m_pUDP->errorString());
         }
     } else {
-        return tr("[Error]UDP not open");
+        message = tr("[Error]UDP not open");
     }
+    return message;
 }
 
 void UDPApp::onBytesSended(qint64 bytes) {

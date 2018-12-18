@@ -7,6 +7,7 @@
 #include <QComboBox>
 #include <QListWidget>
 #include <QVector>
+#include <QQueue>
 
 class TCPApp : public QObject
 {
@@ -53,6 +54,7 @@ public:
     QComboBox *m_pcbxListenIP = nullptr;
     QComboBox *m_pcbxListenPort = nullptr;
     QListWidget *m_plistTCPConn = nullptr;
+    QQueue<QByteArray> m_sendData;
 };
 
 #endif // TCPAPP_H

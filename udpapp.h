@@ -6,6 +6,7 @@
 #include <QComboBox>
 #include <QListWidget>
 #include <QCheckBox>
+#include <QQueue>
 
 class UDPApp : public QObject
 {
@@ -40,6 +41,7 @@ public:
     QComboBox *m_pcbxRecvPort = nullptr;
     QListWidget *m_plistUDPConn = nullptr;
     QCheckBox *m_pcheckConn = nullptr;
+    QQueue<QByteArray> m_sendData;
 };
 
 #endif // UDPAPP_H

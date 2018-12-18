@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSerialPort>
 #include <QComboBox>
+#include <QQueue>
 #include "setup.h"
 
 class SerialPort : public QObject
@@ -49,6 +50,7 @@ public:
     QComboBox *m_pCboxParity = nullptr;
     QComboBox *m_pCboxStop = nullptr;
     QComboBox *m_pCboxFlow = nullptr;
+    QQueue<QByteArray> m_sendData;
 };
 
 #endif // SERIALPORT_H

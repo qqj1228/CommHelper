@@ -206,15 +206,24 @@ void MainWindow::on_btnSend_clicked()
 
 void MainWindow::onSended(qint64 bytes, QString address) {
     QString message;
-
+    m_send.clear();
     switch (m_pUi->tabWidget->currentIndex()) {
     case MainWindow::SerialTab:
+        while (m_send.size() < bytes && !m_pMySerial->m_sendData.isEmpty()) {
+            m_send.append(m_pMySerial->m_sendData.dequeue());
+        }
         message = this->getDisplayMessage(m_send, address, true, MainWindow::SerialTab);
         break;
     case MainWindow::TCPTab:
+        while (m_send.size() < bytes && !m_pMyTCP->m_sendData.isEmpty()) {
+            m_send.append(m_pMyTCP->m_sendData.dequeue());
+        }
         message = this->getDisplayMessage(m_send, address, true, MainWindow::TCPTab);
         break;
     case MainWindow::UDPTab:
+        while (m_send.size() < bytes && !m_pMyUDP->m_sendData.isEmpty()) {
+            m_send.append(m_pMyUDP->m_sendData.dequeue());
+        }
         message = this->getDisplayMessage(m_send, address, true, MainWindow::UDPTab);
         break;
     }
@@ -287,6 +296,9 @@ void MainWindow::onRecved(QByteArray data, QString address, int enumTunnel) {
 void MainWindow::on_btnClearText_clicked()
 {
     m_pUi->textBrowser->clear();
+    m_iSended = 0;
+    m_iRecved = 0;
+    this->showBytes();
 }
 
 void MainWindow::on_btnUDP_clicked(bool checked)

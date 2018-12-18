@@ -157,6 +157,7 @@ QString TCPApp::sendData(const QByteArray &data) {
     if (m_pClient->state() == QAbstractSocket::ConnectedState) {
         ret = m_pClient->write(data);
         if (ret > -1) {
+            m_sendData.enqueue(data);
             message = tr("TCP Client Send Data Successfully: %1 Bytes").arg(ret);
         } else {
             message = tr("[Error]TCP Client Failed to Send Data: %1").arg(m_pClient->errorString());
@@ -167,6 +168,7 @@ QString TCPApp::sendData(const QByteArray &data) {
             int index = m_plistTCPConn->row(item);
             ret = m_qvClient.at(index)->write(data);
             if (ret > -1) {
+                m_sendData.enqueue(data);
                 size += ret;
             } else {
                 qstrFailed += QString("\"%1:%2\": %3, ")

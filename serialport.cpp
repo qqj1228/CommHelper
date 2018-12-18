@@ -105,6 +105,7 @@ QString SerialPort::sendData(const QByteArray &data) {
     if (m_pSerial->isOpen()) {
         this->setupSerial();
         if (m_pSerial->write(data)) {
+            m_sendData.enqueue(data);
             message = tr("Serial Port: ") + m_pSerial->portName() + tr(" Successfully Send Data");
         } else {
             message = tr("[Error]Serial Port: ") + m_pSerial->portName() + tr(" Failed to Send Data, ") + m_pSerial->errorString();

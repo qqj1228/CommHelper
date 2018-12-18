@@ -260,12 +260,12 @@
 ++++++ 过滤显示: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="249"/>
+        <location filename="mainwindow.cpp" line="258"/>
         <source>Finished sending text file content</source>
         <translation>发送文件内容已完成</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="251"/>
+        <location filename="mainwindow.cpp" line="260"/>
         <source>[Error]Can&apos;t open this file!</source>
         <translation>[Error]无法打开这个文件！</translation>
     </message>
@@ -288,55 +288,37 @@
         <translation>已关闭串口</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="108"/>
+        <location filename="serialport.cpp" line="109"/>
         <source>Serial Port: </source>
         <translation>串口: </translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="108"/>
+        <location filename="serialport.cpp" line="109"/>
         <source> Successfully Send Data</source>
         <translation> 发送数据成功</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="110"/>
+        <location filename="serialport.cpp" line="111"/>
         <source> Failed to Send Data, </source>
         <translation> 发送数据失败, </translation>
     </message>
     <message>
-        <source>Successfully Send Data</source>
-        <translation type="vanished">发送数据成功</translation>
-    </message>
-    <message>
-        <location filename="serialport.cpp" line="110"/>
+        <location filename="serialport.cpp" line="111"/>
         <source>[Error]Serial Port: </source>
         <translation>[Error]串口: </translation>
     </message>
     <message>
-        <source>Failed to Send Data, </source>
-        <translation type="vanished">发送数据失败, </translation>
-    </message>
-    <message>
-        <location filename="serialport.cpp" line="113"/>
+        <location filename="serialport.cpp" line="114"/>
         <source>[Error]Serial Port not open</source>
         <translation>[Error]串口没有打开</translation>
     </message>
     <message>
-        <location filename="serialport.cpp" line="127"/>
+        <location filename="serialport.cpp" line="128"/>
         <source>[Error]code: %1, Description: %2</source>
         <translation>[Error]错误码: %1, 描述: %2</translation>
     </message>
     <message>
-        <source>SerialPort Error</source>
-        <translation type="vanished">串口出错</translation>
-    </message>
-    <message>
-        <source>Error code: %1
-Description: %2</source>
-        <translation type="vanished">错误码: %1
-错误描述: %2</translation>
-    </message>
-    <message>
-        <location filename="serialport.cpp" line="158"/>
+        <location filename="serialport.cpp" line="159"/>
         <source>Serial Port: %1, Recv: %2 Bytes</source>
         <translation>串口: %1, 接收: %2 字节</translation>
     </message>
@@ -384,37 +366,37 @@ Description: %2</source>
         <translation>已建立TCP连接&quot;%1:%2&quot;</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="160"/>
+        <location filename="tcpapp.cpp" line="161"/>
         <source>TCP Client Send Data Successfully: %1 Bytes</source>
         <translation>TCP客户端发送数据成功: %1 字节</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="162"/>
+        <location filename="tcpapp.cpp" line="163"/>
         <source>[Error]TCP Client Failed to Send Data: %1</source>
         <translation>[Error]TCP客户端发送数据失败: %1</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="180"/>
+        <location filename="tcpapp.cpp" line="182"/>
         <source>TCP Server Send Data Successfully: %1 Bytes</source>
         <translation>TCP服务端成功发送数据: %1 字节</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="182"/>
+        <location filename="tcpapp.cpp" line="184"/>
         <source>[Error]Failed to Send Data: </source>
         <translation>[Error]发送数据失败: </translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="185"/>
+        <location filename="tcpapp.cpp" line="187"/>
         <source>[Error]No selected TCP Client connection</source>
         <translation>[Error]未选择TCP客户端连接</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="188"/>
+        <location filename="tcpapp.cpp" line="190"/>
         <source>[Error]TCP Client or Server not open</source>
         <translation>[Error]未打开TCP客户端或服务端</translation>
     </message>
     <message>
-        <location filename="tcpapp.cpp" line="225"/>
+        <location filename="tcpapp.cpp" line="227"/>
         <source>All selected TCP Client has disconnected</source>
         <translation>所有已选择的TCP客户端均已断开连接</translation>
     </message>
@@ -452,28 +434,6 @@ Description: %2</source>
 <context>
     <name>UDPApp</name>
     <message>
-        <source>Started UDP Receiver - %1:%2</source>
-        <translation type="vanished">已打开UDP接收端口 - %1:%2</translation>
-    </message>
-    <message>
-        <source>[Error]Can not start UDP Receiver: %1</source>
-        <translation type="vanished">[Error]无法打开UDP接收端口: %1</translation>
-    </message>
-    <message>
-        <source>Closed UDP Receiver</source>
-        <translation type="vanished">已关闭UDP接收端口</translation>
-    </message>
-    <message>
-        <source>Receive error: %1</source>
-        <oldsource>Receive error: %1, </oldsource>
-        <translation type="obsolete">接收出错: %1, </translation>
-    </message>
-    <message>
-        <source>Send error: %1</source>
-        <oldsource>Send error: %2, </oldsource>
-        <translation type="obsolete">发送出错: %2, </translation>
-    </message>
-    <message>
         <location filename="udpapp.cpp" line="34"/>
         <source>Open UDP on &quot;%1:%2&quot;</source>
         <translation>打开UDP&quot;%1:%2&quot;</translation>
@@ -494,22 +454,22 @@ Description: %2</source>
         <translation>[Error]错误码: %1, 错误描述: %2</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="96"/>
+        <location filename="udpapp.cpp" line="98"/>
         <source>[Error]No selected connection</source>
         <translation>[Error]未选择连接</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="105"/>
+        <location filename="udpapp.cpp" line="107"/>
         <source>UDP Send Data Successfully: %1 Bytes</source>
         <translation>UDP发送数据成功: %1 字节</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="107"/>
+        <location filename="udpapp.cpp" line="112"/>
         <source>[Error]UDP Failed to Send Data: %1</source>
         <translation>[Error]UDP发送数据失败: %1</translation>
     </message>
     <message>
-        <location filename="udpapp.cpp" line="110"/>
+        <location filename="udpapp.cpp" line="115"/>
         <source>[Error]UDP not open</source>
         <translation>[Error]UDP未打开</translation>
     </message>
